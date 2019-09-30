@@ -4,6 +4,7 @@ Array.prototype.random = function () {
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseContainer = document.querySelector("#phrase-container")
+let gameHash = {}
 
 document.addEventListener("DOMContentLoaded", function (){
     lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
@@ -64,9 +65,40 @@ document.addEventListener("DOMContentLoaded", function (){
     .then(data => {
         let phrase = data.random().quote
         phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
+
+        // This following method takes the Random Quote and does the following:
+        // 1- upcases all the letters and swaps *spaces* for underscores
+        // 2- Splits the string into an Array
+        // 3- creates a new Hash (named gameHash) with k:v of UniqueLetter:[array of index
+             // numbers for the letter]
+        gameHash = hashOfLettersAndIndexes(phrase)
+        //This next line is just for testing and to see the gameHashArray in the console.
+        console.dir(gameHash)
     })
 })
 
+/// -------------- Support Functions -----------
+
+function hashOfLettersAndIndexes(phrase) {
+  let letterIndex = 0
+  let letter = ""
+  let outputHash = {}
+  let splitPhrase = phrase.replace(/ /g,"_").split("")
+    for ( letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
+    if (!!outputHash[splitPhrase[letterindex]]) {
+      letter = splitPhrase[letterindex]
+      outputHash[letter].push(letterindex)
+    } else {
+      letter = splitPhrase[letterindex]
+      outputHash[letter] = [letterindex]
+    }
+  }
+  return outputHash
+}
+
+
+
+//  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
     // add conditional logic here to check if the event target is a letter contained in the current phrase
         // if it is ...... we want to turn that button green and render that letter into the phraseContainer
