@@ -1,12 +1,28 @@
 #letter-possibilities-container {
   background-color: lightblue;
+  border-radius: 10px;
+  border-radius: 10px;
+
 }
 
 #phrase-container {
-    background-color:lightblue;
+    background-color: yellow;
+    border-radius: 50px;
+    text-align: center;
 }
 
 #letter-possibility {
-    color: red;
-    padding: 1vw;
+    color:blue;
+    padding: 2vw;
+    border-radius:10px;
+    margin: 2vw;
+}
+
+#hangman-image-container {
+    padding: 2vw;
+    border-radius:10px;
+    background-color:blue;
+    margin-bottom: 5vh;
+    text-align: center;
+    padding: auto;
 }
