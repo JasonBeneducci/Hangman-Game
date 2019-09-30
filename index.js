@@ -83,7 +83,7 @@ function hashOfLettersAndIndexes(phrase) {
   let letterIndex = 0
   let letter = ""
   let outputHash = {}
-  let splitPhrase = phrase.replace(/ /g,"_").split("")
+  let splitPhrase = phrase.toUpperCase().replace(/ /g,"_").split("")
     for ( letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
     if (!!outputHash[splitPhrase[letterindex]]) {
       letter = splitPhrase[letterindex]
