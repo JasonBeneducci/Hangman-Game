@@ -1,0 +1,12 @@
+#letter-possibilities-container {
+  background-color: lightblue;
+}
+
+#phrase-container {
+    background-color:lightblue;
+}
+
+#letter-possibility {
+    color: red;
+    padding: 1vw;
+}
