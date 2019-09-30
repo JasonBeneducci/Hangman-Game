@@ -4,6 +4,7 @@ Array.prototype.random = function () {
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseContainer = document.querySelector("#phrase-container")
+const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
 
 document.addEventListener("DOMContentLoaded", function (){
@@ -74,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function (){
         gameHash = hashOfLettersAndIndexes(phrase)
         //This next line is just for testing and to see the gameHashArray in the console.
         console.dir(gameHash)
+        //This method creates empty blocks for each of the letters in the phrase
+        buildEmptyLetterBlocks(phrase)
     })
 })
 
@@ -94,7 +97,23 @@ function hashOfLettersAndIndexes(phrase) {
     }
   }
   return outputHash
-}
+} // ends hashOfLettersAndIndexes function
+
+
+function buildEmptyLetterBlocks(phrase) {
+  splitPhrase = phrase.toUpperCase().replace(/ /g,"_").split("")
+  blockCount = phrase.length
+  for (b = 0; b < blockCount; b++ )    {
+    if (splitPhrase[b] === "_") { 
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<span>*space*</span>` )
+    } else {
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend", 
+      `<button id="emptyBlock" data-answer-idex=${b}>${/[A-Z]/i.test(splitPhrase[b]) ? "" : splitPhrase[b]}</button>`)
+    }
+    // Ends the phraseAnswerBlocks.insertAdjacentHTML
+
+    }
+} // ends buildEmptyLetterBlocks Funciton
 
 
 
