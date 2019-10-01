@@ -10,13 +10,9 @@ const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
 let filterCategory = ""
 let filteredQuotes = ""
-Array.prototype.random = function () {
-  return this[Math.floor((Math.random() * this.length))]
-}
-
-
 let allQuotes = []
 const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
 document.addEventListener("DOMContentLoaded", function (){
   
   
