@@ -7,7 +7,7 @@ const phraseContainer = document.querySelector("#phrase-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
 const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-const categories = ["Movie Quotes", "Professional Sports Teams"]
+const categories = ["Movie Quotes", "Professional Sports Teams", "Song Lyrics"]
 
 document.addEventListener("DOMContentLoaded", function (){
 
@@ -86,9 +86,12 @@ function buildEmptyLetterBlocks(phrase) {
   for (b = 0; b < blockCount; b++ )    {
     if (splitPhrase[b] === "_") { 
       phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<span>*space*</span>` )
-    } else {
+    } else if (/[A-Z]/i.test(splitPhrase[b])) {
       phraseAnswerBlocks.insertAdjacentHTML("beforeend", 
-      `<button id="emptyBlock" data-answer-idex=${b}>${/[A-Z]/i.test(splitPhrase[b]) ? "" : splitPhrase[b]}</button>`)
+      `<button id="emptyBlock" data-answer-idex=${b}></button>`)
+    }  else {
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend", 
+      `<button id="emptyBlock" data-answer-idex=${b}><span>${splitPhrase[b]}</span></button>`)
     }
     // Ends the phraseAnswerBlocks.insertAdjacentHTML
 
