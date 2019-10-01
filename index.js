@@ -7,7 +7,7 @@ const phraseContainer = document.querySelector("#phrase-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
 const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-const categories = ["Movie Quotes", "Professional Sports Teams"]
+const categories = ["Movie Quotes", "Professional Sports Teams", "Song Lyrics"]
 
 document.addEventListener("DOMContentLoaded", function (){
 

@@ -211,6 +211,16 @@ Quote.create!(quote:  "Houston Rockets", author: "NBA", category: "Professio
 Quote.create!(quote:  "Memphis Grizzlies", author: "NBA", category: "Professional Sport Teams")
 Quote.create!(quote:  "New Orleans Hornets", author: "NBA", category: "Professional Sport Teams")
 Quote.create!(quote:  "San Antonio Spurs", author: "NBA", category: "Professional Sport Teams")
+Quote.create!(quote:  "I will survive! Oh as long as I know how to love I know I will stay alive!", author: "Gloria Gaynor ", category: "Song Lyrics")
+Quote.create!(quote:  "I won't be afraid just as long as you stand, stand by me.", author: "Ben E. King", category: "Song Lyrics")
+Quote.create!(quote:  "I'm a survivor, I'm not gonna give up, I'm not gonna stop, I'm gonna work harder.", author: "Destiny's Child", category: "Song Lyrics")
+Quote.create!(quote:  "I hear babies cry, I watch them grow, They'll learn much more, Than I'll ever know. And I think to myself, What a wonderful World", author: "Louis Armstrong", category: "Song Lyrics")
+Quote.create!(quote:  "Sing with me, sing for the year, sing for the laughter, and sing it for the tear.", author: " Aerosmith", category: "Song Lyrics")
+Quote.create!(quote:  "In every life we have some trouble. But when you worry, you make it double.", author: "Bobby McFerrin", category: "Song Lyrics")
+Quote.create!(quote:  "All you need is love, love. Love is all your need.", author: "The Beatles", category: "Song Lyrics")
+Quote.create!(quote:  "You only get one shot, do not miss your chance to blow. This opportunity comes once in a lifetime", author: "Eminem", category: "Song Lyrics")
+Quote.create!(quote:  "Get up, stand up! Don’t give up the fight!", author: "Bob Marley ", category: "Song Lyrics")
+Quote.create!(quote:  "You may say I'm a dreamer. But I'm not the only one.", author: "John Lennon", category: "Song Lyrics")`
 
 # Player.create!(name: "Tom")
 # Player.create!(name: "Jason")
