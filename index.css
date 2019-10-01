@@ -10,6 +10,18 @@
     text-align: center;
 }
 
+#letter-possibilities-container {
+  background-color: lightgray;
+  border-radius: 10px;
+  border-radius: 10px;
+}
+
+#phrase-container {
+    background-color:rgb(74, 250, 20);
+    border-radius: 50px;
+    text-align: center;
+}
+
 #phrase-answer_blocks {
     background-color: gray;
 }
@@ -24,19 +36,25 @@
 
 #letter-possibility-button {
     background-color: black;
+    font-size: 4vh;
     color:white;
-    padding: 4vh;
-    margin: .5vh;
+    margin: .1vh;
+    width:10vh;
+    height: 10vh;
     border-radius: 10px;
+    border-color: yellow;
 
 }
 
-.successful-letter-possibility {
+#successful-letter-possibility {
     background-color: green;
+    font-size: 4vh;
     color:white;
-    padding: 4vh;
-    margin: .5vh;
+    margin: .1vh;
+    width:10vh;
+    height: 10vh;
     border-radius: 10px;
+    border-color: yellow;
 
 }
 /* #phrase-answer_blocks {
@@ -44,22 +62,24 @@
 } */
 #top-container {
     padding: 2vw;
-    background-color:rgb(74, 250, 20);
+    background-color: rgba(7, 247, 227, 0.801);
     text-align: center;
     padding: auto;
 }
 #hangman-image-container {
-    border-radius:10px;
+    border-radius:100px;
 }
 
 #category-container {
-    background-color:gray;
+    background-color:black;
+    border-style: groove;
     border-radius: 10px;
+    border-color: yellow;
 }
 
 #hangman-image {
-    border-radius: 10px;
-    padding: 10vh;
+    border-radius: 100px;
+    padding: 8vh;
 }
 
 .empty-block {
