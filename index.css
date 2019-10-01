@@ -70,6 +70,17 @@
     padding: 3vh;
     border-color: rgb(74, 250, 20);
 }
+
+.empty-block-space {
+    border-width: 0vh 0vh 0vh 0vh;
+    background-color: gray;
+    border-style: ridge;
+    margin: 1vh;
+    padding: 3vh;
+    border-color:gray;
+}
+
 .punctuation-span {
     font-size: 5vh;
+    color: rgb(74, 250, 20);
 }

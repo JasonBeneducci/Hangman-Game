@@ -93,7 +93,8 @@ function buildEmptyLetterBlocks(phrase) {
   blockCount = phrase.length
   for (b = 0; b < blockCount; b++ )    {
     if (splitPhrase[b] === "_") { 
-      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<span>*space*</span>` )
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>` )
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>`)
     } else if (/[A-Z]/i.test(splitPhrase[b])){
       phraseAnswerBlocks.insertAdjacentHTML("beforeend", 
         `<button class="empty-block" data-answer-index=${b}></button>`
