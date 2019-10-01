@@ -6,61 +6,41 @@ const lettersContainer = document.querySelector("#letter-possibilities-container
 const phraseContainer = document.querySelector("#phrase-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
+const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+const categories = ["Movie Quotes", "Professional Sports Teams"]
 
 document.addEventListener("DOMContentLoaded", function (){
-    lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility" data-id="A" type="button" class="letter-possibility-button">A</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="B" type="button" class="letter-possibility-button">B</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="C" type="button" class="letter-possibility-button">C</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="D" type="button" class="letter-possibility-button">D</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="E" type="button" class="letter-possibility-button">E</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="F" type="button" class="letter-possibility-button">F</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="G" type="button" class="letter-possibility-button">G</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="H" type="button" class="letter-possibility-button">H</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="I" type="button" class="letter-possibility-button">I</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="J" type="button" class="letter-possibility-button">J</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="K" type="button" class="letter-possibility-button">K</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="L" type="button" class="letter-possibility-button">L</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="M" type="button" class="letter-possibility-button">M</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="N" type="button" class="letter-possibility-button">N</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="O" type="button" class="letter-possibility-button">O</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="P" type="button" class="letter-possibility-button">P</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="Q" type="button" class="letter-possibility-button">Q</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="R" type="button" class="letter-possibility-button">R</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="S" type="button" class="letter-possibility-button">S</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="T" type="button" class="letter-possibility-button">T</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="U" type="button" class="letter-possibility-button">U</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="V" type="button" class="letter-possibility-button">V</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="W" type="button" class="letter-possibility-button">W</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="X" type="button" class="letter-possibility-button">X</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="Y" type="button" class="letter-possibility-button">Y</button></div>
-        <div class="col">
-          <button id="letter-possibility" data-id="Z" type="button" class="letter-possibility-button">Z</button></div>`)
+
+  // Creates all the letter blocks
+    lettersArr.forEach( function(let) {
+      lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
+          <button id="letter-possibility" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
+      `) // ends lettersContainer.insertAdjacentHTML(
+    })// Ends lettersArr.forEach loop
+    
         
+
+
+    // Creates the "New Game" button and Categories dropdown
+
+
+    hangmanImageContainer.insertAdjacentHTML("beforeend", `
+    <h1>Select a category</h1>
+      <form action="">
+        <select id="setCategory">
+        </select>
+        <input type="button" value="category" onclick="NEWGAME-FUNCTION()" />
+       </form>
+    `)
+    let dropdown = document.getElementById("setCategory")
+    categories.forEach( function(cat) {
+      dropdown.insertAdjacentHTML("beforeend", `
+         <option value="${cat}">${cat}</option>
+      `)}
+    )
+
+  
+
     fetch("http://localhost:3000/api/v1/quotes")
     .then(response => response.json())
     .then(data => {
@@ -123,6 +103,7 @@ function buildEmptyLetterBlocks(phrase) {
 
 //  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
+  console.dir(e.target)
     // add conditional logic here to check if the event target is a letter contained in the current phrase
         // if it is ...... we want to turn that button green and render that letter into the phraseContainer
     if (e.target.tagName === "BUTTON") {
