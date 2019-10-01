@@ -89,7 +89,11 @@ Quote.create!(quote:  "My mother thanks you. My father thanks you. My sister tha
 Quote.create!(quote:  "Nobody puts Baby in a corner.", author: "Dirty Dancing", category: "Movie Quotes")
 Quote.create!(quote:  "I'll get you, my pretty, and your little dog, too!", author: "The Wizard of Oz", category: "Movie Quotes")
 Quote.create!(quote:  "I'm king of the world!", author: "Titanic", category: "Movie Quotes")
+<<<<<<< HEAD
 Quote.create!(quote:  "Carolina Hurricanes", author: "NHL", category: "Professional Sport Teams")
+=======
+Quote.create!(quote: "Carolina Hurricanes", author: "NHL", category: "Professional Sports Teams")
+>>>>>>> JasonBeneducci
 Quote.create!(quote:  "Columbus Blue Jackets", author: "NHL", category: "Professional Sport Teams")
 Quote.create!(quote:  "New Jersey Devils", author: "NHL", category: "Professional Sport Teams")
 Quote.create!(quote:  "New York Islanders", author: "NHL", category: "Professional Sport Teams")
@@ -222,7 +226,7 @@ Quote.create!(quote:  "You only get one shot, do not miss your chance to blow. T
 Quote.create!(quote:  "Get up, stand up! Don’t give up the fight!", author: "Bob Marley ", category: "Song Lyrics")
 Quote.create!(quote:  "You may say I'm a dreamer. But I'm not the only one.", author: "John Lennon", category: "Song Lyrics")
 
-# Player.create!(name: "Tom")
-# Player.create!(name: "Jason")
+Player.create!(name: "Tom")
+Player.create!(name: "Jason")
 
 

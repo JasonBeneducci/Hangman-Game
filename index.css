@@ -18,27 +18,48 @@
     color:white;
     padding: 2vw;
     border-radius:10px;
-    margin: 2vw;
+    margin: 1vw;
+    font-size: 10vh;
 }
 
-.letter-possibility-button {
+#letter-possibility-button {
     background-color: black;
+    color:white;
+    padding: 4vh;
+    margin: .5vh;
+    border-radius: 10px;
+
 }
 
+.successful-letter-possibility {
+    background-color: green;
+    color:white;
+    padding: 4vh;
+    margin: .5vh;
+    border-radius: 10px;
+
+}
 /* #phrase-answer_blocks {
    STYLING FOR THE ANSWER BLOCKS
 } */
-
-#hangman-image-container {
+#top-container {
     padding: 2vw;
-    border-radius:10px;
     background-color:rgb(74, 250, 20);
     text-align: center;
     padding: auto;
 }
+#hangman-image-container {
+    border-radius:10px;
+}
+
+#category-container {
+    background-color:gray;
+    border-radius: 10px;
+}
 
 #hangman-image {
     border-radius: 10px;
+    padding: 10vh;
 }
 
 .empty-block {
@@ -48,4 +69,7 @@
     margin: 1vh;
     padding: 3vh;
     border-color: rgb(74, 250, 20);
+}
+.punctuation-span {
+    font-size: 5vh;
 }
