@@ -3,7 +3,6 @@ Array.prototype.random = function () {
 }
 const topContainer = document.querySelector("#hangman-image-container")
 const categoryContainer = document.querySelector("#category-container")
-const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
@@ -21,12 +20,7 @@ const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
 
 
 
-  // Creates all the letter blocks
-    lettersArr.forEach( function(let) {
-      lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility-button" data-id="${let}" type="button">${let}</button></div>
-      `) // ends lettersContainer.insertAdjacentHTML(
-    })// Ends lettersArr.forEach loop
+createAllLetterBlocks() 
     
         
 
@@ -69,7 +63,7 @@ const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
     lettersContainer.innerHTML = ""
     lettersArr.forEach( function(let) {
       lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
+          <button id="letter-possibility-button" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
       `) // ends lettersContainer.insertAdjacentHTML(
     })// Ends lettersArr.forEach loop
   } //  Ends createAllLetterBlocks() function
