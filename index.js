@@ -9,63 +9,63 @@ let gameHash = {}
 
 document.addEventListener("DOMContentLoaded", function (){
     lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility" data-id="A" type="button" class="btn btn-warning">A</button></div>
+          <button id="letter-possibility" data-id="A" type="button" class="letter-possibility-button">A</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="B" type="button" class="btn btn-warning">B</button></div>
+          <button id="letter-possibility" data-id="B" type="button" class="letter-possibility-button">B</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="C" type="button" class="btn btn-warning">C</button></div>
+          <button id="letter-possibility" data-id="C" type="button" class="letter-possibility-button">C</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="D" type="button" class="btn btn-warning">D</button></div>
+          <button id="letter-possibility" data-id="D" type="button" class="letter-possibility-button">D</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="E" type="button" class="btn btn-warning">E</button></div>
+          <button id="letter-possibility" data-id="E" type="button" class="letter-possibility-button">E</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="F" type="button" class="btn btn-warning">F</button></div>
+          <button id="letter-possibility" data-id="F" type="button" class="letter-possibility-button">F</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="G" type="button" class="btn btn-warning">G</button></div>
+          <button id="letter-possibility" data-id="G" type="button" class="letter-possibility-button">G</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="H" type="button" class="btn btn-warning">H</button></div>
+          <button id="letter-possibility" data-id="H" type="button" class="letter-possibility-button">H</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="I" type="button" class="btn btn-warning">I</button></div>
+          <button id="letter-possibility" data-id="I" type="button" class="letter-possibility-button">I</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="J" type="button" class="btn btn-warning">J</button></div>
+          <button id="letter-possibility" data-id="J" type="button" class="letter-possibility-button">J</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="K" type="button" class="btn btn-warning">K</button></div>
+          <button id="letter-possibility" data-id="K" type="button" class="letter-possibility-button">K</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="L" type="button" class="btn btn-warning">L</button></div>
+          <button id="letter-possibility" data-id="L" type="button" class="letter-possibility-button">L</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="M" type="button" class="btn btn-warning">M</button></div>
+          <button id="letter-possibility" data-id="M" type="button" class="letter-possibility-button">M</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="N" type="button" class="btn btn-warning">N</button></div>
+          <button id="letter-possibility" data-id="N" type="button" class="letter-possibility-button">N</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="O" type="button" class="btn btn-warning">O</button></div>
+          <button id="letter-possibility" data-id="O" type="button" class="letter-possibility-button">O</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="P" type="button" class="btn btn-warning">P</button></div>
+          <button id="letter-possibility" data-id="P" type="button" class="letter-possibility-button">P</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="Q" type="button" class="btn btn-warning">Q</button></div>
+          <button id="letter-possibility" data-id="Q" type="button" class="letter-possibility-button">Q</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="R" type="button" class="btn btn-warning">R</button></div>
+          <button id="letter-possibility" data-id="R" type="button" class="letter-possibility-button">R</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="S" type="button" class="btn btn-warning">S</button></div>
+          <button id="letter-possibility" data-id="S" type="button" class="letter-possibility-button">S</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="T" type="button" class="btn btn-warning">T</button></div>
+          <button id="letter-possibility" data-id="T" type="button" class="letter-possibility-button">T</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="U" type="button" class="btn btn-warning">U</button></div>
+          <button id="letter-possibility" data-id="U" type="button" class="letter-possibility-button">U</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="V" type="button" class="btn btn-warning">V</button></div>
+          <button id="letter-possibility" data-id="V" type="button" class="letter-possibility-button">V</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="W" type="button" class="btn btn-warning">W</button></div>
+          <button id="letter-possibility" data-id="W" type="button" class="letter-possibility-button">W</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="X" type="button" class="btn btn-warning">X</button></div>
+          <button id="letter-possibility" data-id="X" type="button" class="letter-possibility-button">X</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="Y" type="button" class="btn btn-warning">Y</button></div>
+          <button id="letter-possibility" data-id="Y" type="button" class="letter-possibility-button">Y</button></div>
         <div class="col">
-          <button id="letter-possibility" data-id="Z" type="button" class="btn btn-warning">Z</button></div>`)
+          <button id="letter-possibility" data-id="Z" type="button" class="letter-possibility-button">Z</button></div>`)
         
     fetch("http://localhost:3000/api/v1/quotes")
     .then(response => response.json())
     .then(data => {
         let phrase = data.random().quote
-        phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
+        // phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
 
         // This following method takes the Random Quote and does the following:
         // 1- upcases all the letters and swaps *spaces* for underscores
@@ -106,10 +106,14 @@ function buildEmptyLetterBlocks(phrase) {
   for (b = 0; b < blockCount; b++ )    {
     if (splitPhrase[b] === "_") { 
       phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<span>*space*</span>` )
-    } else {
+    } else if (/[A-Z]/i.test(splitPhrase[b])){
       phraseAnswerBlocks.insertAdjacentHTML("beforeend", 
-      `<button id="emptyBlock" data-answer-idex=${b}>${/[A-Z]/i.test(splitPhrase[b]) ? "" : splitPhrase[b]}</button>`)
-    }
+        `<button class="empty-block" data-answer-index=${b}></button>`
+    )} else {
+      phraseAnswerBlocks.insertAdjacentHTML("beforeend",
+        `<span>${splitPhrase[b]}</span>`
+    )}
+
     // Ends the phraseAnswerBlocks.insertAdjacentHTML
 
     }

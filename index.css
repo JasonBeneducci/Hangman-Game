@@ -1,22 +1,30 @@
 #letter-possibilities-container {
-  background-color: lightblue;
+  background-color: rgb(74, 250, 20);
   border-radius: 10px;
   border-radius: 10px;
-
 }
 
 #phrase-container {
-    background-color: yellow;
+    background-color:rgb(74, 250, 20);
     border-radius: 50px;
     text-align: center;
 }
 
+#phrase-answer_blocks {
+    background-color: gray;
+}
+
 #letter-possibility {
-    color:blue;
+    color:white;
     padding: 2vw;
     border-radius:10px;
     margin: 2vw;
 }
+
+.letter-possibility-button {
+    background-color: black;
+}
+
 /* #phrase-answer_blocks {
    STYLING FOR THE ANSWER BLOCKS
 } */
@@ -24,8 +32,20 @@
 #hangman-image-container {
     padding: 2vw;
     border-radius:10px;
-    background-color:blue;
-    margin-bottom: 5vh;
+    background-color:rgb(74, 250, 20);
     text-align: center;
     padding: auto;
+}
+
+#hangman-image {
+    border-radius: 10px;
+}
+
+.empty-block {
+    border-width: 0vh 0vh 0.3vh 0vh;
+    background-color: gray;
+    border-style: ridge;
+    margin: 1vh;
+    padding: 3vh;
+    border-color: rgb(74, 250, 20);
 }
