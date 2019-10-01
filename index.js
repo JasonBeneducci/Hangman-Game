@@ -7,9 +7,11 @@ const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
+let pressedLetter
 let filterCategory = ""
 let filteredQuotes = ""
 let allQuotes = []
+let corrospondingLetter
 let allAnswerBlocksDiv
 const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
@@ -35,7 +37,7 @@ createAllLetterBlocks()
       <form id="gameCategoryForm" action="">
         <select id="setCategory">
         </select>
-        <input type="button" value="category" onclick="filterAllChooseRandom()" />
+        <input type="button" value="New Game" onclick="filterAllChooseRandom()" />
        </form>
     `)
     let dropdown = document.getElementById("setCategory")
@@ -136,7 +138,8 @@ function filterAllChooseRandom() {
     
 } //
 
-  // function wrongLetterPick() {
+  function wrongLetterPick() {
+  console.log("you picked the wrong letter")
   //   count--
 
   //   insertAdjacentHTML('afterbegin', `<img src="${count}.jpg" id="hangman-image">`)
@@ -148,7 +151,7 @@ function filterAllChooseRandom() {
   //   picture.change
 
   //   // console.log("Wrong letter fucntion running")
-  // }  // Ends Wrong Letter
+  }  // Ends Wrong Letter
 
   function actOnPlayedLetter(letter) {
     // debugger
@@ -179,9 +182,21 @@ lettersContainer.addEventListener("click", function (e) {
         let targetDiv = e.target.parentElement
         e.target.remove()
         targetDiv.insertAdjacentHTML('beforeend', `<button class="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
-        
         actOnPlayedLetter(e.target.dataset.id)
+    } // else if (e.target.tagName === "BUTTON")
+}) // emnds CLICK ON LETTER event listener
 
-    } 
-    // else if (e.target.tagName === "BUTTON")
-})
+document.addEventListener("keydown", function(keypress) {
+  if (keypress.keyCode >= 65 && keypress.keyCode <= 90)
+    {
+      console.log(keypress.code.slice(-1))
+      pressedLetter = keypress.code.slice(-1)
+      corrospondingLetter = lettersContainer.querySelector(`[data-id='${pressedLetter}']`)
+      let targetDiv = corrospondingLetter.parentElement
+        corrospondingLetter.remove()
+        targetDiv.insertAdjacentHTML('beforeend', `<button class="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
+        actOnPlayedLetter(pressedLetter)
+
+  }
+  // do something
+}) // ends KEYPRESS Event Listener
