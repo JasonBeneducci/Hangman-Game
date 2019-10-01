@@ -10,20 +10,15 @@ Array.prototype.random = function () {
 
 
 let allQuotes = []
+const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 document.addEventListener("DOMContentLoaded", function (){
   
   
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
-const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
 
 
-  // Creates all the letter blocks
-    lettersArr.forEach( function(let) {
-      lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
-      `) // ends lettersContainer.insertAdjacentHTML(
-    })// Ends lettersArr.forEach loop
+
     
         
 
@@ -53,7 +48,21 @@ const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
     })
 })
 
+    //Builds all letter blocks upon page load
+    createAllLetterBlocks()
+
 /// -------------- Support Functions -----------
+
+  // Creates all the letter blocks
+  function createAllLetterBlocks() {
+    lettersContainer.innerHTML = ""
+    lettersArr.forEach( function(let) {
+      lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
+          <button id="letter-possibility" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
+      `) // ends lettersContainer.insertAdjacentHTML(
+    })// Ends lettersArr.forEach loop
+  } //  Ends createAllLetterBlocks() function
+
 
 function hashOfLettersAndIndexes(phrase) {
   let letterIndex = 0
@@ -98,9 +107,8 @@ function buildEmptyLetterBlocks(phrase) {
 //  Takes input and starts a game
 
 function filterAllChooseRandom() {
-  console.log("Category button works")
+  createAllLetterBlocks()
   filterCategory = document.getElementById("setCategory").value
-  // debugger
   filteredQuotes = allQuotes.filter( function(q) { return q.category == filterCategory })
 
   let phrase = filteredQuotes.random().quote
