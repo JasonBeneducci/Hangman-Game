@@ -1,15 +1,22 @@
-Array.prototype.random = function () {
-    return this[Math.floor((Math.random() * this.length))]
-}
-const hangmanImageContainer = document.querySelector("#hangman-image-container")
-const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseContainer = document.querySelector("#phrase-container")
+const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 let gameHash = {}
-const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-const categories = ["Movie Quotes", "Professional Sports Teams", "Song Lyrics"]
+let filterCategory = ""
+let filteredQuotes = ""
+Array.prototype.random = function () {
+  return this[Math.floor((Math.random() * this.length))]
+}
 
+
+let allQuotes = []
 document.addEventListener("DOMContentLoaded", function (){
+  
+  
+const hangmanImageContainer = document.querySelector("#hangman-image-container")
+const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
+
 
   // Creates all the letter blocks
     lettersArr.forEach( function(let) {
@@ -22,20 +29,18 @@ document.addEventListener("DOMContentLoaded", function (){
 
 
     // Creates the "New Game" button and Categories dropdown
-
-
     hangmanImageContainer.insertAdjacentHTML("beforeend", `
     <h1>Select a category</h1>
-      <form action="">
+      <form id="gameCategoryForm" action="">
         <select id="setCategory">
         </select>
-        <input type="button" value="category" onclick="NEWGAME-FUNCTION()" />
+        <input type="button" value="category" onclick="filterAllChooseRandom()" />
        </form>
     `)
     let dropdown = document.getElementById("setCategory")
     categories.forEach( function(cat) {
       dropdown.insertAdjacentHTML("beforeend", `
-         <option value="${cat}">${cat}</option>
+         <option  value="${cat}">${cat}</option>
       `)}
     )
 
@@ -44,19 +49,7 @@ document.addEventListener("DOMContentLoaded", function (){
     fetch("http://localhost:3000/api/v1/quotes")
     .then(response => response.json())
     .then(data => {
-        let phrase = data.random().quote
-        // phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
-
-        // This following method takes the Random Quote and does the following:
-        // 1- upcases all the letters and swaps *spaces* for underscores
-        // 2- Splits the string into an Array
-        // 3- creates a new Hash (named gameHash) with k:v of UniqueLetter:[array of index
-             // numbers for the letter]
-        gameHash = hashOfLettersAndIndexes(phrase)
-        //This next line is just for testing and to see the gameHashArray in the console.
-        console.dir(gameHash)
-        //This method creates empty blocks for each of the letters in the phrase
-        buildEmptyLetterBlocks(phrase)
+        allQuotes = data
     })
 })
 
@@ -81,6 +74,7 @@ function hashOfLettersAndIndexes(phrase) {
 
 
 function buildEmptyLetterBlocks(phrase) {
+  phraseAnswerBlocks.innerHTML = ""
   splitPhrase = phrase.toUpperCase().replace(/ /g,"_").split("")
   blockCount = phrase.length
   for (b = 0; b < blockCount; b++ )    {
@@ -98,6 +92,31 @@ function buildEmptyLetterBlocks(phrase) {
 
     }
 } // ends buildEmptyLetterBlocks Funciton
+
+
+
+//  Takes input and starts a game
+
+function filterAllChooseRandom() {
+  console.log("Category button works")
+  filterCategory = document.getElementById("setCategory").value
+  // debugger
+  filteredQuotes = allQuotes.filter( function(q) { return q.category == filterCategory })
+
+  let phrase = filteredQuotes.random().quote
+  phraseContainer.innerHTML = ""
+  phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
+
+  // This following method takes the Random Quote and does the following:
+  // 1- upcases all the letters and swaps *spaces* for underscores
+  // 2- Splits the string into an Array
+  // 3- creates a new Hash (named gameHash) with k:v of UniqueLetter:[array of index
+       // numbers for the letter]
+  gameHash = hashOfLettersAndIndexes(phrase)
+  //This method creates empty blocks for each of the letters in the phrase
+  buildEmptyLetterBlocks(phrase)
+
+} //
 
 
 
