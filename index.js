@@ -10,6 +10,7 @@ let gameHash = {}
 let filterCategory = ""
 let filteredQuotes = ""
 let allQuotes = []
+let allAnswerBlocksDiv
 const lettersArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
 document.addEventListener("DOMContentLoaded", function (){
@@ -74,15 +75,18 @@ function hashOfLettersAndIndexes(phrase) {
   let letter = ""
   let outputHash = {}
   let splitPhrase = phrase.toUpperCase().replace(/ /g,"_").split("")
-    for ( letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
-    if (!!outputHash[splitPhrase[letterindex]]) {
-      letter = splitPhrase[letterindex]
-      outputHash[letter].push(letterindex)
-    } else {
-      letter = splitPhrase[letterindex]
-      outputHash[letter] = [letterindex]
-    }
-  }
+  for ( letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
+    if (/[A-Z]/i.test(splitPhrase[letterindex])) {
+
+      if (!!outputHash[splitPhrase[letterindex]]) {
+        letter = splitPhrase[letterindex]
+        outputHash[letter].push(letterindex)
+      } else {
+        letter = splitPhrase[letterindex]
+        outputHash[letter] = [letterindex]
+      }
+    }  // ends if statement to see if the index location holds a letter A-Z
+  }// ends for loop for each of the letter indexez
   return outputHash
 } // ends hashOfLettersAndIndexes function
 
@@ -129,8 +133,40 @@ function filterAllChooseRandom() {
   gameHash = hashOfLettersAndIndexes(phrase)
   //This method creates empty blocks for each of the letters in the phrase
   buildEmptyLetterBlocks(phrase)
-
+    
 } //
+
+  // function wrongLetterPick() {
+  //   count--
+
+  //   insertAdjacentHTML('afterbegin', `<img src="${count}.jpg" id="hangman-image">`)
+    
+
+
+  //   wrontCount.goup
+  //   is wrong count >= 7 run youLose()
+  //   picture.change
+
+  //   // console.log("Wrong letter fucntion running")
+  // }  // Ends Wrong Letter
+
+  function actOnPlayedLetter(letter) {
+    // debugger
+    if (!!gameHash[letter]) {
+      indexesOfPickedLetterArr = gameHash[letter]
+      delete gameHash[letter]
+      allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
+      indexesOfPickedLetterArr.forEach( function(index) {
+      allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = letter
+      if (Object.keys(gameHash).length == 0) {
+        console.log("YOU WIN")
+      } // ends the if statement to see if the player won the game
+      }) //Ends indexesOfPickedLetterArr.forEach Loop
+    } else {
+      wrongLetterPick() 
+    }
+
+  } // ends actOnPlayedLetter function
 
 
 
@@ -143,6 +179,9 @@ lettersContainer.addEventListener("click", function (e) {
         let targetDiv = e.target.parentElement
         e.target.remove()
         targetDiv.insertAdjacentHTML('beforeend', `<button class="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
+        
+        actOnPlayedLetter(e.target.dataset.id)
+
     } 
     // else if (e.target.tagName === "BUTTON")
 })
