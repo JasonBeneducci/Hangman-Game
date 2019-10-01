@@ -1,7 +1,8 @@
 Array.prototype.random = function () {
     return this[Math.floor((Math.random() * this.length))]
 }
-const hangmanImageContainer = document.querySelector("#hangman-image-container")
+const topContainer = document.querySelector("#hangman-image-container")
+const categoryContainer = document.querySelector("#category-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseContainer = document.querySelector("#phrase-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (){
   // Creates all the letter blocks
     lettersArr.forEach( function(let) {
       lettersContainer.insertAdjacentHTML('beforeend',`<div class="col">
-          <button id="letter-possibility" data-id="${let}" type="button" class="btn btn-warning">${let}</button></div>
+          <button id="letter-possibility-button" data-id="${let}" type="button">${let}</button></div>
       `) // ends lettersContainer.insertAdjacentHTML(
     })// Ends lettersArr.forEach loop
     
@@ -24,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function (){
     // Creates the "New Game" button and Categories dropdown
 
 
-    hangmanImageContainer.insertAdjacentHTML("beforeend", `
+    categoryContainer.insertAdjacentHTML("beforeend", `
+    <div></div>
     <h1>Select a category</h1>
       <form action="">
         <select id="setCategory">
@@ -91,7 +93,7 @@ function buildEmptyLetterBlocks(phrase) {
         `<button class="empty-block" data-answer-index=${b}></button>`
     )} else {
       phraseAnswerBlocks.insertAdjacentHTML("beforeend",
-        `<span>${splitPhrase[b]}</span>`
+        `<span class="punctuation-span">${splitPhrase[b]}</span>`
     )}
 
     // Ends the phraseAnswerBlocks.insertAdjacentHTML
@@ -109,6 +111,7 @@ lettersContainer.addEventListener("click", function (e) {
     if (e.target.tagName === "BUTTON") {
         let targetDiv = e.target.parentElement
         e.target.remove()
-        targetDiv.insertAdjacentHTML('beforeend', `<button id="letter-possibility" data-id="${e.target.dataset.id}" type="button" class="btn btn-success">${e.target.dataset.id}</button>`)
-    }
+        targetDiv.insertAdjacentHTML('beforeend', `<button class="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
+    } 
+    // else if (e.target.tagName === "BUTTON")
 })
