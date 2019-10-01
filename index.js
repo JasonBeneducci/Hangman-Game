@@ -181,7 +181,8 @@ lettersContainer.addEventListener("click", function (e) {
   console.dir(e.target)
   // add conditional logic here to check if the event target is a letter contained in the current phrase
   // if it is ...... we want to turn that button green and render that letter into the phraseContainer
-  if (e.target.tagName === "BUTTON") {
+  if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button") {
+    console.log(e.target)
     let targetDiv = e.target.parentElement
     e.target.remove()
     targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
