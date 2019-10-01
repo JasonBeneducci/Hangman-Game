@@ -141,7 +141,7 @@ function filterAllChooseRandom() {
 
 } //
 
-function wrongLetterPick() {
+  function wrongLetterPick() {
   console.log("you picked the wrong letter")
   //   count--
 
@@ -154,15 +154,15 @@ function wrongLetterPick() {
   //   picture.change
 
   //   // console.log("Wrong letter fucntion running")
-}  // Ends Wrong Letter
+  }  // Ends Wrong Letter
 
-function actOnPlayedLetter(letter) {
-  // debugger
-  if (!!gameHash[letter]) {
-    indexesOfPickedLetterArr = gameHash[letter]
-    delete gameHash[letter]
-    allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
-    indexesOfPickedLetterArr.forEach(function (index) {
+  function actOnPlayedLetter(letter) {
+    // debugger
+    if (!!gameHash[letter]) {
+      indexesOfPickedLetterArr = gameHash[letter]
+      delete gameHash[letter]
+      allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
+      indexesOfPickedLetterArr.forEach( function(index) {
       allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = letter
       if (Object.keys(gameHash).length == 0) {
         phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
