@@ -6,6 +6,7 @@ const categoryContainer = document.querySelector("#category-container")
 const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
+let counter = ""
 let gameHash = {}
 let pressedLetter
 let filterCategory = ""
@@ -123,6 +124,7 @@ function buildEmptyLetterBlocks(phrase) {
 
 function filterAllChooseRandom() {
   createAllLetterBlocks()
+  counter = 7
   filterCategory = document.getElementById("setCategory").value
   filteredQuotes = allQuotes.filter(function (q) { return q.category == filterCategory })
 
@@ -143,8 +145,8 @@ function filterAllChooseRandom() {
 
   function wrongLetterPick() {
   console.log("you picked the wrong letter")
-  //   count--
-
+    counter--
+    console.log(counter)
   //   insertAdjacentHTML('afterbegin', `<img src="${count}.jpg" id="hangman-image">`)
 
 
@@ -178,10 +180,10 @@ function filterAllChooseRandom() {
 
 //  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
-  console.dir(e.target)
+  console.dir(counter)
   // add conditional logic here to check if the event target is a letter contained in the current phrase
   // if it is ...... we want to turn that button green and render that letter into the phraseContainer
-  if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button") {
+  if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button"  && counter != "") {
     console.log(e.target)
     let targetDiv = e.target.parentElement
     e.target.remove()
