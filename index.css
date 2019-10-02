@@ -1,11 +1,11 @@
 #letter-possibilities-container {
-  background-color: rgb(74, 250, 20);
+  background-color:  yellow;
   border-radius: 10px;
   border-radius: 10px;
 }
 
 #phrase-container {
-    background-color:rgb(74, 250, 20);
+    background-color: yellow;
     border-radius: 50px;
     text-align: center;
 }
@@ -17,7 +17,7 @@
 }
 
 #phrase-container {
-    background-color:rgb(74, 250, 20);
+    background-color: yellow;
     border-radius: 50px;
     text-align: center;
 }
@@ -88,7 +88,7 @@
     border-style: ridge;
     margin: 1vh;
     padding: 3vh;
-    border-color: rgb(74, 250, 20);
+    border-color:  yellow;
 }
 
 .empty-block-space {
@@ -102,5 +102,5 @@
 
 .punctuation-span {
     font-size: 5vh;
-    color: rgb(74, 250, 20);
+    color:  yellow;
 }
