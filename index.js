@@ -6,9 +6,9 @@ const categoryContainer = document.querySelector("#category-container")
 const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
+let counter = ""
 const hangmanContainer = document.querySelector("#hangman-container")
 const hangmanImage = document.querySelector("#hangman-image")
-let counter = ""
 let gameHash = {}
 let pressedLetter
 let filterCategory = ""
@@ -17,6 +17,7 @@ let allQuotes = []
 let corrospondingLetter
 let allAnswerBlocksDiv
 const printedCounterDiv = document.getElementById("printed-counter")
+const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
 const availablePrefixes = ["", "clown", "killerClown", "KillyTheClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -117,10 +118,7 @@ function buildEmptyLetterBlocks(phrase) {
         `<span class="punctuation-span">${splitPhrase[b]}</span>`
       )
     }
-
-    // Ends the phraseAnswerBlocks.insertAdjacentHTML
-
-  }
+  } // Ends the phraseAnswerBlocks.insertAdjacentHTML
 } // ends buildEmptyLetterBlocks Funciton
 
 
@@ -149,8 +147,14 @@ function filterAllChooseRandom() {
   gameHash = hashOfLettersAndIndexes(phrase)
   //This method creates empty blocks for each of the letters in the phrase
   buildEmptyLetterBlocks(phrase)
+  buildInfoBox()
 
-} //
+} //  EndsFilterAll Choose Random --- NEW GAME Basically
+
+  function buildInfoBox() {
+    infoDiv.innerHTML = `<h2> welcome!</h2>`
+  } // ends buildInfoBox function
+
 
   function youLose() {
     phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOULOSE!!!!<p>")
@@ -163,16 +167,33 @@ function filterAllChooseRandom() {
     if (counter === 0) {
       youLose()
     } else {
-      let newSrc = `${imagePrefix}${counter}`
-      return hangmanImage["src"] = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/110/clown-face_1f921.png"
-      // `./images/${newSrc}.png`
+      // hangmanImage.setAttribute("src", `./images/${imagePrefix}${counter}.png`)
+      // hangmanContainer.innerHTML = `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`
+        hangmanContainer.innerHTML = " "
+        hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+      // debugger
     }
 
   }  // Ends Wrong Letter
 
   function youWin() {
-    lettersContainer.innerHTML= " "
-    phraseContainer.insertAdjacentHTML('afterbegin', `<div class="col" id="winner">You Win!</div>`)
+    if (counter === 1)
+      {
+        hangmanContainer.innerHTML = " "
+        printedCounterDiv.innerHTML = (`<h2>Nice work, but did you do it in time?!?!?</h2>`)
+        hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/kBTA59MvoikCLXGqRr" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+        setTimeout(function() {
+          printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
+          hangmanContainer.innerHTML = " "
+          hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+          phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
+        }, 10700)
+    } else {
+      printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
+      hangmanContainer.innerHTML = " "
+      hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+      phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
+    }
   }
 
   function actOnPlayedLetter(letter) {

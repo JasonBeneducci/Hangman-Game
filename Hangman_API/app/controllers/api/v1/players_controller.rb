@@ -1,14 +1,13 @@
 class Api::V1::PlayerController < ApplicationController
 
 
-  def update
+  def check
     if Player.find_by(name: params[:name])
       player = Player.find_by(name: params[:name])
-      player.update(games_played: player.total_games + 1)
       render json: player
     else
       player = Player.new(name: params[:name])
-      player.update(games_played: player.total_games + 1)
+      player.create(games_played: player.total_games)
       render json: player
     end
   end
@@ -17,7 +16,12 @@ class Api::V1::PlayerController < ApplicationController
     player = Player.find_by(name: params[:name])
     player.update(games_played: player.total_wins + 1
     render json: player
+  end
 
+  def newGame
+    player = Player.find_by(name: params[:name])
+    player.update(games_played: player.total_games + 1
+    render json: player
   end
 
   private
