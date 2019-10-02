@@ -14,6 +14,7 @@ let filteredQuotes = ""
 let allQuotes = []
 let corrospondingLetter
 let allAnswerBlocksDiv
+const printedCounterDiv = document.getElementById("printed-counter")
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -125,6 +126,7 @@ function buildEmptyLetterBlocks(phrase) {
 function filterAllChooseRandom() {
   createAllLetterBlocks()
   counter = 7
+  updatePrintedCounter()
   filterCategory = document.getElementById("setCategory").value
   filteredQuotes = allQuotes.filter(function (q) { return q.category == filterCategory })
 
@@ -146,7 +148,6 @@ function filterAllChooseRandom() {
   function wrongLetterPick() {
   console.log("you picked the wrong letter")
     counter--
-    console.log(counter)
   //   insertAdjacentHTML('afterbegin', `<img src="${count}.jpg" id="hangman-image">`)
 
 
@@ -167,14 +168,22 @@ function filterAllChooseRandom() {
       indexesOfPickedLetterArr.forEach( function(index) {
       allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = letter
       if (Object.keys(gameHash).length == 0) {
-        phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
+        youWin()
+          // --PUT THIS INTO NEW youWin() functoin --> phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
       } // ends the if statement to see if the player won the game
     }) //Ends indexesOfPickedLetterArr.forEach Loop
-  } else {
-    wrongLetterPick()
-  }
+    } else {
+      wrongLetterPick()
+    }
+  } // ends actOnPlayedLetter function
 
-} // ends actOnPlayedLetter function
+  function updatePrintedCounter() {
+    printedCounterDiv.innerHTML = (`
+      <h2>You have ${counter} turns left!</h2>
+    `)  /// ends printedCounterDiv.innerHTML call
+  } // ends Update Printed Counter funciton
+
+
 
 
 
@@ -193,14 +202,16 @@ lettersContainer.addEventListener("click", function (e) {
 }) // emnds CLICK ON LETTER event listener
 
 document.addEventListener("keydown", function (keypress) {
-  if (keypress.keyCode >= 65 && keypress.keyCode <= 90) {
+  if (keypress.keyCode >= 65 && keypress.keyCode <= 90 && counter != "") {
     console.log(keypress.code.slice(-1))
     pressedLetter = keypress.code.slice(-1)
     corrospondingLetter = lettersContainer.querySelector(`[data-id='${pressedLetter}']`)
-    let targetDiv = corrospondingLetter.parentElement
-    corrospondingLetter.remove()
-    targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
-    actOnPlayedLetter(pressedLetter)
+    if (corrospondingLetter.id === "letter-possibility-button") {
+        let targetDiv = corrospondingLetter.parentElement
+        corrospondingLetter.remove()
+        targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
+        actOnPlayedLetter(pressedLetter)
+    }// ends IF to make sure the Letter hasnt been selected yet
 
   }
   // do something
