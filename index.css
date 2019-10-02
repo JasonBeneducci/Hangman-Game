@@ -16,14 +16,9 @@
   border-radius: 10px;
 }
 
-#phrase-container {
-    background-color: yellow;
-    border-radius: 50px;
-    text-align: center;
-}
-
 #phrase-answer_blocks {
     background-color: gray;
+    
 }
 
 #letter-possibility {
@@ -50,7 +45,7 @@
     background-color: green;
     font-size: 4vh;
     color:white;
-    margin: .1vh;
+    margin: 3vh;
     width:10vh;
     height: 10vh;
     border-radius: 10px;
@@ -59,23 +54,26 @@
 
 }
 
+.grow {
+    transform: scale(1.3);
+}
+
 #wrong-letter-possibility-button {
     background-color: red;
     font-size: 4vh;
     color:white;
-    margin: .1vh;
+    margin: 3vh;
     width:10vh;
     height: 10vh;
     border-radius: 10px;
     border-color: yellow;
-
 }
 /* #phrase-answer_blocks {
    STYLING FOR THE ANSWER BLOCKS
 } */
 #top-container {
     padding: 2vw;
-    background-color: rgba(7, 247, 227, 0.801);
+    background-image: linear-gradient(red, yellow);
     text-align: center;
     padding: auto;
 }
@@ -93,6 +91,15 @@
     border-color: yellow;
 }
 
+#winner {
+    background-image:linear-gradient(red, yellow);
+    border-style: groove;
+    border-radius: 10px;
+    border-color: yellow;
+    font-size: 5vh;
+    color: white;
+}
+
 #hangman-image {
     border-radius: 75px;
     padding: 2vh;
@@ -105,7 +112,14 @@
     border-style: ridge;
     margin: 1vh;
     padding: 3vh;
-    border-color:  yellow;
+    border-color:  white;
+}
+
+.answer-block {
+    border-width: 0vh 0vh 0vh 0vh;
+    background-color: gray;
+    margin: 1vh;
+    padding: 3vh;
 }
 
 .empty-block-space {
@@ -117,7 +131,90 @@
     border-color:gray;
 }
 
+.correct-answer-block {
+    border-width: 0.3vh 0.3vh 0.3vh 0.3vh;
+    color:white;
+    font-size: 50px;
+    background-image:linear-gradient(red, yellow);
+    border-style: ridge;
+    margin: .5vh;
+    padding: 2vh;
+    border-color:  yellow;
+    border-radius:20px;
+}
+
 .punctuation-span {
     font-size: 5vh;
     color:  yellow;
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 800px;
+    position: absolute;
+    display: block;
+}
+.red {
+    width: 30px;
+    height: 30px;
+    background: orangered;
+    box-shadow: 0px 0px 8px 3px orangered;
+}
+.orange {
+    left:5px;
+    width: 25px;
+    height: 25px;
+    background: orange;
+    box-shadow: 0px 0px 6px 3px orange;
+}
+.gold {
+    left:8px;
+    width: 15px;
+    height: 15px;
+    background: gold;
+    box-shadow: 0px 0px 4px 2px gold;
+}
+.white {
+    left:10px;
+    width: 12px;
+    height: 12px;
+    background: lightyellow;
+    box-shadow: 0px 0px 4px 2px lightyellow;
+}
+.blue {
+    left:17px;
+    width: 7px;
+    height: 15px;
+    background: darkblue;
+    box-shadow: 0px 0px 3px 4px darkblue;
+}
+.black {
+    left:9px;
+    width: 18px;
+    height: 27px;
+    bottom:-20px;
+    background: black;
+    box-shadow: 0px 0px 85px 4px black;
+}
+.base {
+    border-radius: 50%;
+    position: absolute;
+}
+.flame-wrapper {
+    position: relative;
+    animation: flicker 3ms ease-in infinite;
+}
+.flame {
+    bottom: 0;
+    position: absolute;
+    border-radius: 50% 0% 50% 50%;
+    transform: rotate(-45deg);
+}
+@keyframes flicker {
+    0% {transform: rotate(-1deg);}
+    20% {transform: rotate(2deg) scaleY(1.05);}
+    40% {transform: rotate(-1deg);}
+    60% {transform: rotate(1deg);}
+    80% {transform: rotate(-1deg) scaleY(0.90);}
+    100% {transform: rotate(1deg);}
 }

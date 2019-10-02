@@ -7,6 +7,7 @@ const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
 const hangmanContainer = document.querySelector("#hangman-container")
+const hangmanImage = document.querySelector("#hangman-image")
 let counter = ""
 let gameHash = {}
 let pressedLetter
@@ -162,14 +163,16 @@ function filterAllChooseRandom() {
     if (counter === 0) {
       youLose()
     } else {
-      hangmanContainer.innerHTML = " "
-      hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+      let newSrc = `${imagePrefix}${counter}`
+      return hangmanImage["src"] = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/110/clown-face_1f921.png"
+      // `./images/${newSrc}.png`
     }
 
   }  // Ends Wrong Letter
 
   function youWin() {
-    phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
+    lettersContainer.innerHTML= " "
+    phraseContainer.insertAdjacentHTML('afterbegin', `<div class="col" id="winner">You Win!</div>`)
   }
 
   function actOnPlayedLetter(letter) {
@@ -179,12 +182,23 @@ function filterAllChooseRandom() {
       delete gameHash[letter]
       allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
       indexesOfPickedLetterArr.forEach( function(index) {
-      allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = letter
+        
+        allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="wrapper">
+        <div class="flame-wrapper">
+          <div class="flame red"></div>
+          <div class="flame orange"></div>
+          <div class="flame gold"></div>
+          <div class="flame white"></div>
+          <div class="base blue"></div>
+          <div class="base black"></div>
+        </div>`
+        let newBlock = setTimeout(function () { allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="correct-answer-block">${letter}</div>`}, 1000)
       if (Object.keys(gameHash).length == 0) {
         youWin()
       } // ends the if statement to see if the player won the game
     }) //Ends indexesOfPickedLetterArr.forEach Loop
     } else {
+      console.log('hitting the wrong letter pick', letter)
       wrongLetterPick()
     }
   } // ends actOnPlayedLetter function
@@ -192,9 +206,9 @@ function filterAllChooseRandom() {
   function updatePrintedCounter() {
     // debugger
     if (counter === 1) {
-      printedCounterDiv.innerHTML = (`<h2>Hurry! You have only 1 chance left, but can still save the day!</h2>`)
+      printedCounterDiv.innerHTML = `<h2>Hurry! You have only 1 chance left, but can still save the day!</h2>`
     } else {
-      printedCounterDiv.innerHTML = (`<h2>You have ${counter} turns left!</h2>`)
+      printedCounterDiv.innerHTML = `<h2>You have ${counter} turns left!</h2>`
     }
   } // ends Update Printed Counter funciton
 
@@ -204,23 +218,33 @@ function filterAllChooseRandom() {
 
 //  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
+  e.preventDefault()
   // console.dir(counter)
   // add conditional logic here to check if the event target is a letter contained in the current phrase
   // if it is ...... we want to turn that button green and render that letter into the phraseContainer
   if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button"  && counter != "") {
-    // console.log(e.target)
     let targetDiv = e.target.parentElement
     e.target.remove()
     currentCounter = counter
     actOnPlayedLetter(e.target.dataset.id)
-    if (currentCounter === counter)
-      {targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)}
-    else
-      {targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)}
-  } // else if (e.target.tagName === "BUTTON")
+    if (currentCounter === counter){
+      targetDiv.insertAdjacentHTML('afterbegin', `<div class="wrapper">
+        <div class="flame-wrapper">
+          <div class="flame red"></div>
+          <div class="flame orange"></div>
+          <div class="flame gold"></div>
+          <div class="flame white"></div>
+          <div class="base blue"></div>
+          <div class="base black"></div>
+        </div>`)
+      targetDiv.innerHTML =`<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`
+    } else {
+      targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
+  }} // else if (e.target.tagName === "BUTTON")
 }) // emnds CLICK ON LETTER event listener
 
 document.addEventListener("keydown", function (keypress) {
+  // keypress.preventDefault()
   if (keypress.keyCode >= 65 && keypress.keyCode <= 90 && counter != "") {
     console.log(keypress.code.slice(-1))
     pressedLetter = keypress.code.slice(-1)
@@ -230,11 +254,13 @@ document.addEventListener("keydown", function (keypress) {
         currentCounter = counter
         actOnPlayedLetter(pressedLetter)
         corrospondingLetter.remove()
-        if (currentCounter === counter)
-        {targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)}
-      else
-        {targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)}
-        }// ends IF to make sure the Letter hasnt been selected yet
+        if (currentCounter === counter) {
+          targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
+        }
+        else {
+        targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
+      }
+    }// ends IF to make sure the Letter hasnt been selected yet
 
   }
   // do something
