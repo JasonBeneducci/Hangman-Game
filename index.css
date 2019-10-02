@@ -55,6 +55,19 @@
     height: 10vh;
     border-radius: 10px;
     border-color: yellow;
+    transform: rotate(45deg);
+
+}
+
+#wrong-letter-possibility-button {
+    background-color: red;
+    font-size: 4vh;
+    color:white;
+    margin: .1vh;
+    width:10vh;
+    height: 10vh;
+    border-radius: 10px;
+    border-color: yellow;
 
 }
 /* #phrase-answer_blocks {
@@ -67,8 +80,11 @@
     padding: auto;
 }
 #hangman-image-container {
-    border-radius:100px;
+    border-radius:50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+
 
 #category-container {
     background-color:black;
@@ -78,8 +94,9 @@
 }
 
 #hangman-image {
-    border-radius: 100px;
-    padding: 8vh;
+    border-radius: 75px;
+    padding: 2vh;
+    
 }
 
 .empty-block {

@@ -191,9 +191,11 @@ function filterAllChooseRandom() {
 
   function updatePrintedCounter() {
     // debugger
-    printedCounterDiv.innerHTML = (`
-      <h2>You have ${counter} turns left!</h2>
-    `)  /// ends printedCounterDiv.innerHTML call
+    if (counter === 1) {
+      printedCounterDiv.innerHTML = (`<h2>Hurry! You have only 1 chance left, but can still save the day!</h2>`)
+    } else {
+      printedCounterDiv.innerHTML = (`<h2>You have ${counter} turns left!</h2>`)
+    }
   } // ends Update Printed Counter funciton
 
 
@@ -209,8 +211,12 @@ lettersContainer.addEventListener("click", function (e) {
     // console.log(e.target)
     let targetDiv = e.target.parentElement
     e.target.remove()
-    targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
+    currentCounter = counter
     actOnPlayedLetter(e.target.dataset.id)
+    if (currentCounter === counter)
+      {targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)}
+    else
+      {targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)}
   } // else if (e.target.tagName === "BUTTON")
 }) // emnds CLICK ON LETTER event listener
 
@@ -221,10 +227,14 @@ document.addEventListener("keydown", function (keypress) {
     corrospondingLetter = lettersContainer.querySelector(`[data-id='${pressedLetter}']`)
     if (corrospondingLetter.id === "letter-possibility-button") {
         let targetDiv = corrospondingLetter.parentElement
-        corrospondingLetter.remove()
-        targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)
+        currentCounter = counter
         actOnPlayedLetter(pressedLetter)
-    }// ends IF to make sure the Letter hasnt been selected yet
+        corrospondingLetter.remove()
+        if (currentCounter === counter)
+        {targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)}
+      else
+        {targetDiv.insertAdjacentHTML('beforeend', `<button id="wrong-letter-possibility-button" data-id="${pressedLetter}" type="button">${pressedLetter}</button>`)}
+        }// ends IF to make sure the Letter hasnt been selected yet
 
   }
   // do something
