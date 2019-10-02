@@ -6,6 +6,7 @@ const categoryContainer = document.querySelector("#category-container")
 const phraseContainer = document.querySelector("#phrase-container")
 const lettersContainer = document.querySelector("#letter-possibilities-container")
 const phraseAnswerBlocks = document.getElementById("phrase-answer_blocks")
+const hangmanContainer = document.querySelector("#hangman-container")
 let counter = ""
 let gameHash = {}
 let pressedLetter
@@ -14,6 +15,8 @@ let filteredQuotes = ""
 let allQuotes = []
 let corrospondingLetter
 let allAnswerBlocksDiv
+let imagePrefix = ""
+const availablePrefixes = ["", "clown", "killerClown", "KillyTheClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -124,7 +127,10 @@ function buildEmptyLetterBlocks(phrase) {
 
 function filterAllChooseRandom() {
   createAllLetterBlocks()
+  hangmanContainer.innerHTML = ""
   counter = 7
+  hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+  imagePrefix = availablePrefixes.random()
   filterCategory = document.getElementById("setCategory").value
   filteredQuotes = allQuotes.filter(function (q) { return q.category == filterCategory })
 
@@ -143,19 +149,21 @@ function filterAllChooseRandom() {
 
 } //
 
+  function youLose() {
+    phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOULOSE!!!!1<p>")
+  }
+  
   function wrongLetterPick() {
-  console.log("you picked the wrong letter")
+    // const hangmanContainer = document.querySelector("#hangman-container")
     counter--
-    console.log(counter)
-  //   insertAdjacentHTML('afterbegin', `<img src="${count}.jpg" id="hangman-image">`)
+    // update printedCounter()
+    if (counter === 0) {
+      youLose()
+    } else {
+      hangmanContainer.innerHTML = " "
+      hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+    }
 
-
-
-  //   wrontCount.goup
-  //   is wrong count >= 7 run youLose()
-  //   picture.change
-
-  //   // console.log("Wrong letter fucntion running")
   }  // Ends Wrong Letter
 
   function actOnPlayedLetter(letter) {
@@ -180,11 +188,11 @@ function filterAllChooseRandom() {
 
 //  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
-  console.dir(counter)
+  // console.dir(counter)
   // add conditional logic here to check if the event target is a letter contained in the current phrase
   // if it is ...... we want to turn that button green and render that letter into the phraseContainer
   if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button"  && counter != "") {
-    console.log(e.target)
+    // console.log(e.target)
     let targetDiv = e.target.parentElement
     e.target.remove()
     targetDiv.insertAdjacentHTML('beforeend', `<button id="successful-letter-possibility" data-id="${e.target.dataset.id}" type="button">${e.target.dataset.id}</button>`)
@@ -194,7 +202,7 @@ lettersContainer.addEventListener("click", function (e) {
 
 document.addEventListener("keydown", function (keypress) {
   if (keypress.keyCode >= 65 && keypress.keyCode <= 90) {
-    console.log(keypress.code.slice(-1))
+    // console.log(keypress.code.slice(-1))
     pressedLetter = keypress.code.slice(-1)
     corrospondingLetter = lettersContainer.querySelector(`[data-id='${pressedLetter}']`)
     let targetDiv = corrospondingLetter.parentElement
