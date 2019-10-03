@@ -19,7 +19,7 @@ let allAnswerBlocksDiv
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
-const availablePrefixes = ["", "clown", "killerClown", "KillyTheClown"]
+const availablePrefixes = ["killerClown", "stripeClown", "krusty", "knifeClown", "gunClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -130,7 +130,7 @@ function filterAllChooseRandom() {
   hangmanContainer.innerHTML = ""
   counter = 7
   updatePrintedCounter()
-  hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+  hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0">`)
   imagePrefix = availablePrefixes.random()
   filterCategory = document.getElementById("setCategory").value
   filteredQuotes = allQuotes.filter(function (q) { return q.category == filterCategory })
@@ -152,7 +152,7 @@ function filterAllChooseRandom() {
 } //  EndsFilterAll Choose Random --- NEW GAME Basically
 
   function buildInfoBox() {
-    infoDiv.innerHTML = `<h2> welcome!</h2>`
+    infoDiv.innerHTML = `<h2>${Object.keys(gameHash)}</h2>`
   } // ends buildInfoBox function
 
 
@@ -170,7 +170,7 @@ function filterAllChooseRandom() {
       // hangmanImage.setAttribute("src", `./images/${imagePrefix}${counter}.png`)
       // hangmanContainer.innerHTML = `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`
         hangmanContainer.innerHTML = " "
-        hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`)
+        hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0" >`)
       // debugger
     }
 
