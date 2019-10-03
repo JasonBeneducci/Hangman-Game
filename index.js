@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Creates the "New Game" button and Categories dropdown
   document.querySelector("#category-container").innerHTML = `
   <div></div>
-  <h1 style="color:white;">Log in to play!</h1>
+  <h1 style="color:white; font-weight: bold; text-transform: uppercase">Log in to play!</h1>
     <form id="gameCategoryForm" >
-      <h4> FirstName: </h4>
+      <h4 style="color: white"> First Name: </h4>
       <input type="text" name="firstName" id="firstName" value="" required />
       <input type="submit" value="New Game" id="logUserIn" />
      </form>
@@ -71,9 +71,7 @@ createAllLetterBlocks()
 /// -------------- Support Functions -----------
 
 function logUserIn(namevar) {
-  debugger
   playerCheck(namevar)
- debugger
   
 }
 
@@ -150,12 +148,14 @@ function buildEmptyLetterBlocks(phrase) {
 
   for (b = 0; b < blockCount; b++) {
     if (splitPhrase[b] === "_") {
-      // phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
-      phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
+        `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
+        `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
+        `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
     } else if (/[A-Z]/i.test(splitPhrase[b])) {
-      phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
-        `<button class="empty-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`
-      )
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend", `<button class="empty-block-startup" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
     } else {
       phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
         `<span class="punctuation-span" data-word-number=${spacesIndArr[b]}>${splitPhrase[b]}</span>`
@@ -245,16 +245,20 @@ function filterAllChooseRandom() {
       allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
       indexesOfPickedLetterArr.forEach( function(index) {
         
-        allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="wrapper">
-        <div class="flame-wrapper">
-          <div class="flame red"></div>
-          <div class="flame orange"></div>
-          <div class="flame gold"></div>
-          <div class="flame white"></div>
-          <div class="base blue"></div>
-          <div class="base black"></div>
-        </div>`
-        let newBlock = setTimeout(function () { allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="correct-answer-block">${letter}</div>`}, 1000)
+        // allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="wrapper">
+        // <div class="flame-wrapper">
+        //   <div class="flame red"></div>
+        //   <div class="flame orange"></div>
+        //   <div class="flame gold"></div>
+        //   <div class="flame white"></div>
+        //   <div class="base blue"></div>
+        //   <div class="base black"></div>
+        // </div>`
+        // let newBlock = setTimeout(function () { allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).className = "empty-block"},1000)
+        let newBlock = allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`)
+        newBlock.className = "empty-block"
+        // debugger
+        newBlock.innerHTML = `<div class="correct-answer-block">${letter}</div>`
       if (Object.keys(gameHash).length == 0) {
         youWin()
       } // ends the if statement to see if the player won the game
@@ -280,7 +284,6 @@ function filterAllChooseRandom() {
     fetch(`http://localhost:3000/api/v1/players/${name}/check`)
     .then ( function(response) { return response.json()} )
     .then ( function(response) {
-      debugger
       if (!!response["name"]) { loggedIn = true}
 
       playerLoggedInExposeNewGameButton()

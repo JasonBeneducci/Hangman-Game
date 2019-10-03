@@ -1,24 +1,19 @@
-#letter-possibilities-container {
-  background-color:  yellow;
-  border-radius: 10px;
-  border-radius: 10px;
-}
-
 #phrase-container {
     background-color: yellow;
     border-radius: 50px;
     text-align: center;
 }
 
-#letter-possibilities-container {
-  background-color: lightgray;
-  border-radius: 10px;
-  border-radius: 10px;
-}
 
 #phrase-answer_blocks {
     background-color: gray;
     
+}
+
+#letter-possibilities-container {
+  background-color: lightgray;
+  border-radius: 10px;
+  border-radius: 10px;
 }
 
 #letter-possibility {
@@ -34,11 +29,10 @@
     font-size: 4vh;
     color:white;
     margin: .1vh;
-    width:10vh;
-    height: 10vh;
+    width:5vh;
+    height: 5vh;
     border-radius: 10px;
     border-color: yellow;
-
 }
 
 #successful-letter-possibility {
@@ -46,16 +40,12 @@
     font-size: 4vh;
     color:white;
     margin: 3vh;
-    width:10vh;
-    height: 10vh;
+    width:5vh;
+    height: 5vh;
     border-radius: 10px;
     border-color: yellow;
     transform: rotate(45deg);
 
-}
-
-.grow {
-    transform: scale(1.3);
 }
 
 #wrong-letter-possibility-button {
@@ -63,8 +53,8 @@
     font-size: 4vh;
     color:white;
     margin: 3vh;
-    width:10vh;
-    height: 10vh;
+    width:5vh;
+    height: 5vh;
     border-radius: 10px;
     border-color: yellow;
 }
@@ -72,8 +62,8 @@
    STYLING FOR THE ANSWER BLOCKS
 } */
 #top-container {
-    padding: 2vw;
-    background-image: linear-gradient(red, yellow);
+    padding-bottom: 0vh;
+    background-color: lime;
     text-align: center;
     padding: auto;
 }
@@ -88,11 +78,12 @@
     background-color:black;
     border-style: groove;
     border-radius: 10px;
-    border-color: yellow;
+    border-color: white;
+    padding: 7%;
 }
 
 #winner {
-    background-image:linear-gradient(red, yellow);
+    background-color: lime;
     border-style: groove;
     border-radius: 10px;
     border-color: yellow;
@@ -102,50 +93,78 @@
 
 #hangman-image {
     border-radius: 75px;
-    padding: 2vh;
+    padding: 0vh;
     
 }
 
 .empty-block {
-    border-width: 0vh 0vh 0.3vh 0vh;
+    border-width: 0vh 0vh 0.0vh 0vh;
+    /* border-width: 0vh 0vh 0.3vh 0vh; */
     background-color: gray;
     border-style: ridge;
-    margin: 1vh;
-    padding: 3vh;
+    margin: .25vw;
+    padding: 1vh;
+    border-color:  white;
+}
+.empty-block-startup {
+    border-width: 0vh 0vh 0.3vh 0vh;
+    /* border-width: 0vh 0vh 0.3vh 0vh; */
+    background-color: gray;
+    border-style: ridge;
+    margin: .25vw;
+    padding: 1vh;
     border-color:  white;
 }
 
 .answer-block {
     border-width: 0vh 0vh 0vh 0vh;
     background-color: gray;
-    margin: 1vh;
-    padding: 3vh;
+    margin: .25vw;
+    padding: 1vh;
+    font-weight: bold;
 }
 
 .empty-block-space {
     border-width: 0vh 0vh 0vh 0vh;
     background-color: gray;
     border-style: ridge;
-    margin: 1vh;
-    padding: 3vh;
+    margin: .25vw;
+    padding: 1vh;
     border-color:gray;
+}
+
+.fake-correct-answer-block {
+    border-width: 0.3vh 0.3vh 0.3vh 0.3vh;
+    color:gray;
+    font-size: 50px;
+    background-image: gray;
+    margin: 2vh;
+    padding: .5vh;
+    border-radius: 20px;
 }
 
 .correct-answer-block {
     border-width: 0.3vh 0.3vh 0.3vh 0.3vh;
-    color:white;
+    color:lime;
+    background-color: gray;
     font-size: 50px;
-    background-image:linear-gradient(red, yellow);
-    border-style: ridge;
-    margin: .5vh;
-    padding: 2vh;
-    border-color:  yellow;
-    border-radius:20px;
+    font-weight: bold; 
+    /* border-style: ridge; */
+    margin: .25vw;
+    padding: 1vh;
+    /* border-color:  lime;
+    border-radius:20px; */
 }
 
 .punctuation-span {
-    font-size: 5vh;
-    color:  yellow;
+    border-width: 0.3vh 0.3vh 0.3vh 0.3vh;
+    color:gray;
+    font-size: 50px;
+    background-image: gray;
+    margin: .5vh;
+    padding: .5vh;
+    border-radius: 20px;
+    color:  lime;
 }
 
 .wrapper {
