@@ -24,6 +24,7 @@ let loggedIn = false
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
+const celebrationArr = ['<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/8CSflsMG1IFos" width="480" height="271" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/xeXEpUVvAxCV2" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/OG766ZCawdMZy" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/10hO3rDNqqg2Xe" width="480" height="252" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/DZkZ6xYj18Jyw" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/Hd3GXtH7xs1CU" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/KXtq8oYQrYMIF9Esi7" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
 const availablePrefixes = ["killerClown", "stripeClown", "krusty", "knifeClown", "gunClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
@@ -249,13 +250,13 @@ function filterAllChooseRandom() {
         setTimeout(function() {
           printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
           hangmanContainer.innerHTML = " "
-          hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+          hangmanContainer.insertAdjacentHTML("afterbegin", `${celebrationArr.random()}`)
           phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
         }, 10700)
     } else {
       printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
       hangmanContainer.innerHTML = " "
-      hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+      hangmanContainer.insertAdjacentHTML("afterbegin", `${celebrationArr.random()}`)
       phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
     }
   }
