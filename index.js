@@ -105,23 +105,28 @@ function buildEmptyLetterBlocks(phrase) {
   phraseAnswerBlocks.innerHTML = ""
   splitPhrase = phrase.toUpperCase().replace(/ /g, "_").split("")
   blockCount = phrase.length
-  phraseAnswerBlocks.insertAdjacentHTML('afterbegin', '<div data-space-type="start">')
-  for (b = 0; b < blockCount; b++) {
-    if (splitPhrase[b] === "_") {
-      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button></div>`)
-      phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<div data-space-type="start"><button class="empty-block-space" data-answer-index=${b}></button>`)
-    } else if (/[A-Z]/i.test(splitPhrase[b])) {
-      phraseAnswerBlocks.insertAdjacentHTML("beforeend",
-        `<button class="empty-block" data-answer-index=${b}></button>`
-      )
-    } else {
-      phraseAnswerBlocks.insertAdjacentHTML("beforeend",
-        `<span class="punctuation-span">${splitPhrase[b]}</span>`
-      )
-    }
-  } // Ends the phraseAnswerBlocks.insertAdjacentHTML
-  phraseAnswerBlocks.insertAdjacentHTML('beforeend', '</div>')
-} // ends buildEmptyLetterBlocks Funciton
+    for (let i = 1; i <= splitPhrase.filter(function (letter) { return letter === "_" }).length + 1; i++) {
+      phraseAnswerBlocks.insertAdjacentHTML('beforeend', `<div data-word-number="${i}"></div>`)
+    }}
+
+
+    
+    for (b = 0; b < blockCount; b++) {
+      if (splitPhrase[b] === "_") {
+        phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>`)
+        phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>`)
+      } else if (/[A-Z]/i.test(splitPhrase[b])) {
+        phraseAnswerBlocks.insertAdjacentHTML("beforeend",
+          `<button class="empty-block" data-answer-index=${b}></button>`
+        )
+      } else {
+        phraseAnswerBlocks.insertAdjacentHTML("beforeend",
+          `<span class="punctuation-span">${splitPhrase[b]}</span>`
+        )
+      }
+    } // Ends the phraseAnswerBlocks.insertAdjacentHTML
+    phraseAnswerBlocks.insertAdjacentHTML('beforeend', '</div>')
+// } // ends buildEmptyLetterBlocks Funciton
 
 
 
