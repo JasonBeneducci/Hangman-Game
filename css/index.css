@@ -30,8 +30,8 @@
     font-size: 4vh;
     color:white;
     margin: .1vh;
-    width:5vh;
-    height: 5vh;
+    width: 8vh;
+    height: 8vh;
     border-radius: 10px;
     border-color: yellow;
 }
@@ -41,8 +41,8 @@
     font-size: 4vh;
     color:white;
     margin: 3vh;
-    width:5vh;
-    height: 5vh;
+    width: 8vh;
+    height: 8vh;
     border-radius: 10px;
     border-color: yellow;
     transform: rotate(45deg);
@@ -54,8 +54,8 @@
     font-size: 4vh;
     color:white;
     margin: 3vh;
-    width:5vh;
-    height: 5vh;
+    width: 8vh;
+    height: 8vh;
     border-radius: 10px;
     border-color: yellow;
 }
@@ -103,7 +103,7 @@
     /* border-width: 0vh 0vh 0.3vh 0vh; */
     background-color: gray;
     border-style: ridge;
-    margin: .25vw;
+    margin-top: .25vw;
     padding: 1vh;
     border-color:  white;
 }
@@ -111,9 +111,13 @@
     border-width: 0vh 0vh 0.3vh 0vh;
     /* border-width: 0vh 0vh 0.3vh 0vh; */
     background-color: gray;
+    color: gray;
     border-style: ridge;
-    margin: .25vw;
-    padding: 1vh;
+    margin-top: .25vh;
+    margin-right: 0.75vw;
+    margin-bottom: 0.25vh;
+    margin-left: 0.75vw;
+    padding: 2vw;
     border-color:  white;
 }
 
@@ -135,13 +139,13 @@
 }
 
 .fake-correct-answer-block {
-    border-width: 0.3vh 0.3vh 0.3vh 0.3vh;
+    border-width: 0.0vh 0.0vh 0.0vh 0.0vh;
     color:gray;
+    background-color: gray;
     font-size: 50px;
-    background-image: gray;
-    margin: 2vh;
-    padding: .5vh;
-    border-radius: 20px;
+    font-weight: bold; 
+    margin: .25vw;
+    padding: 1vh;
 }
 
 .correct-answer-block {

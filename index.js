@@ -157,7 +157,7 @@ function buildEmptyLetterBlocks(phrase) {
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
         `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
-        `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
+        `<button class="fake-correct-answer-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}>A</button>`)
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
         `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
     } else if (/[A-Z]/i.test(splitPhrase[b])) {
@@ -211,10 +211,10 @@ function filterAllChooseRandom() {
     
     
     infoDiv.innerHTML = `
-    <h1>${playerDetails.name}'s Record:</h1>
-    <p>Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
-    <p>Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
-    <h2>${Object.keys(gameHash)}</h2>
+    <h1 style="color:white; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
+    <p style="background-color: black; color:white">Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
+    <p style="background-color: black; color:white">Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
+    <h2 style="color: white">${Object.keys(gameHash)}</h2>
     `
   } // ends buildInfoBox function
 
