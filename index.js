@@ -15,9 +15,11 @@ let filterCategory = ""
 let filteredQuotes = ""
 let allQuotes = []
 let splitPhrase
+let totalGames
 let corrospondingLetter
 let allAnswerBlocksDiv
 let wordCount
+let playerDetails
 let loggedIn = false
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
@@ -45,19 +47,19 @@ document.addEventListener("DOMContentLoaded", function () {
     <form id="gameCategoryForm" >
       <h4> FirstName: </h4>
       <input type="text" name="firstName" id="firstName" value="" required />
-      <input type="submit" value="New Game" id="logUserIn" />
+      <input type="submit" value="Log In" id="logUserIn" />
      </form>
   `
   document.querySelector("#logUserIn").addEventListener("click", function(clicke) {
     clicke.preventDefault()
-    logUserIn(document.getElementById("firstName").value)
-
+    // Verifies the User Name ONLY contains alpha-numberic
+    if (!/^[A-Za-z0-9]+$/.test(document.getElementById("firstName").value)) {
+      alert("Invalid User Name!  Try Again")
+    } else {
+      logUserIn(document.getElementById("firstName").value)
+    }
   })
-
-
   
-
-
   fetch("http://localhost:3000/api/v1/quotes")
     .then(response => response.json())
     .then(data => {
@@ -71,9 +73,8 @@ createAllLetterBlocks()
 /// -------------- Support Functions -----------
 
 function logUserIn(namevar) {
-  debugger
-  playerCheck(namevar)
- debugger
+  playerCheckFetch
+  (namevar)
   
 }
 
@@ -94,6 +95,9 @@ function playerLoggedInExposeNewGameButton() {
          <option  value="${cat}">${cat}</option>
       `)}
   )
+  buildInfoBox()
+  
+
 }  // ends playerLoggedInExposeNewGameButton function
 
 
@@ -166,7 +170,16 @@ function buildEmptyLetterBlocks(phrase) {
 
 
 //  Takes input and starts a game
+
+function increaseGameCount() {
+
+}
+
+function increaseWinCount() {
+
+}
 function filterAllChooseRandom() {
+  playerNewGameFetch(playerDetails.name)
   createAllLetterBlocks()
   hangmanContainer.innerHTML = ""
   counter = 7
@@ -193,7 +206,14 @@ function filterAllChooseRandom() {
 } //  EndsFilterAll Choose Random --- NEW GAME Basically
 
   function buildInfoBox() {
-    infoDiv.innerHTML = `<h2>${Object.keys(gameHash)}</h2>`
+    
+    
+    infoDiv.innerHTML = `
+    <h1>${playerDetails.name}'s Record:</h1>
+    <p>Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
+    <p>Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
+    <h2>${Object.keys(gameHash)}</h2>
+    `
   } // ends buildInfoBox function
 
 
@@ -218,6 +238,7 @@ function filterAllChooseRandom() {
   }  // Ends Wrong Letter
 
   function youWin() {
+    playerNewWinFetch(playerDetails.name)
     if (counter === 1)
       {
         hangmanContainer.innerHTML = " "
@@ -238,7 +259,6 @@ function filterAllChooseRandom() {
   }
 
   function actOnPlayedLetter(letter) {
-    // debugger
     if (!!gameHash[letter]) {
       indexesOfPickedLetterArr = gameHash[letter]
       delete gameHash[letter]
@@ -266,7 +286,6 @@ function filterAllChooseRandom() {
   } // ends actOnPlayedLetter function
 
   function updatePrintedCounter() {
-    // debugger
     if (counter === 1) {
       printedCounterDiv.innerHTML = `<h2>Hurry! You have only 1 chance left, but can still save the day!</h2>`
     } else {
@@ -276,24 +295,53 @@ function filterAllChooseRandom() {
 
 
   // Fetch to check if player exists and CREATE new player if not
-  function playerCheck(name) {
+  function playerCheckFetch(name) {
     fetch(`http://localhost:3000/api/v1/players/${name}/check`)
     .then ( function(response) { return response.json()} )
     .then ( function(response) {
-      debugger
-      if (!!response["name"]) { loggedIn = true}
-
+      if (!!response["name"]) { 
+        loggedIn = true
+        playerDetails = response
+      }
       playerLoggedInExposeNewGameButton()
-
     })
-    // .then( function(data) {
-    //   if (data != undefined) {
-    //     playerDetails = resp
-        
-    //   } else { return resp.errors }
-    // })
-    // .catch(function(errors) { alert(errors) })
-  }  /// Ends playerCheck functin
+  }  /// Ends playerCheckFetch
+
+  function playerNewGameFetch(name) {
+    fetch(`http://localhost:3000/api/v1/players/${name}/newGame`,
+      {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "PATCH"}
+    )
+    .then ( function(response) { return response.json()} )
+    .then ( function(response) {  
+      if (!!response["name"]) { 
+        playerDetails = response
+      } 
+      buildInfoBox()
+     })
+  }  /// Ends playerNewGameFetch
+
+  function playerNewWinFetch(name) {
+    fetch(`http://localhost:3000/api/v1/players/${name}/win`,
+      {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "PATCH"}
+    )
+    .then ( function(response) { return response.json()} )
+    .then ( function(response) {  
+      if (!!response["name"]) { 
+        playerDetails = response
+      } 
+      buildInfoBox()
+     })
+  }  /// Ends playerNewGameFetch
 
 
 
