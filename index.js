@@ -18,17 +18,18 @@ let splitPhrase
 let corrospondingLetter
 let allAnswerBlocksDiv
 let wordCount
+let loggedIn = false
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
 const availablePrefixes = ["killerClown", "stripeClown", "krusty", "knifeClown", "gunClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+const hangmanImageContainer = document.querySelector("#hangman-image-container")
+const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
 
 document.addEventListener("DOMContentLoaded", function () {
 
 
-  const hangmanImageContainer = document.querySelector("#hangman-image-container")
-  const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
 
 
 
@@ -38,25 +39,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // Creates the "New Game" button and Categories dropdown
+  document.querySelector("#category-container").innerHTML = `
+  <div></div>
+  <h1 style="color:white;">Log in to play!</h1>
+    <form id="gameCategoryForm" >
+      <h4> FirstName: </h4>
+      <input type="text" name="firstName" id="firstName" value="" required />
+      <input type="submit" value="New Game" id="logUserIn" />
+     </form>
+  `
+  document.querySelector("#logUserIn").addEventListener("click", function(clicke) {
+    clicke.preventDefault()
+    logUserIn(document.getElementById("firstName").value)
+
+  })
 
 
-  categoryContainer.insertAdjacentHTML("beforeend", `
-    <div></div>
-    <h1 style="color:white;">Select a category</h1>
-      <form id="gameCategoryForm" action="">
-        <select id="setCategory">
-        </select>
-        <input type="button" value="New Game" onclick="filterAllChooseRandom()" />
-       </form>
-    `)
-  let dropdown = document.getElementById("setCategory")
-  categories.forEach(function (cat) {
-    dropdown.insertAdjacentHTML("beforeend", `
-         <option  value="${cat}">${cat}</option>
-      `)
-  }
-  )
-
+  
 
 
   fetch("http://localhost:3000/api/v1/quotes")
@@ -70,6 +69,33 @@ document.addEventListener("DOMContentLoaded", function () {
 createAllLetterBlocks()
 
 /// -------------- Support Functions -----------
+
+function logUserIn(namevar) {
+  debugger
+  playerCheck(namevar)
+ debugger
+  
+}
+
+function playerLoggedInExposeNewGameButton() {
+
+  categoryContainer.innerHTML = `
+    <div></div>
+    <h1 style="color:white;">Select a category</h1>
+      <form id="gameCategoryForm" action="">
+        <select id="setCategory">
+        </select>
+        <input type="button" value="New Game" onclick="filterAllChooseRandom()" />
+       </form>
+    `
+  let dropdown = document.getElementById("setCategory")
+  categories.forEach(function (cat) {
+    dropdown.insertAdjacentHTML("beforeend", `
+         <option  value="${cat}">${cat}</option>
+      `)}
+  )
+}  // ends playerLoggedInExposeNewGameButton function
+
 
 // Creates all the letter blocks
 function createAllLetterBlocks() {
@@ -122,20 +148,20 @@ function buildEmptyLetterBlocks(phrase) {
       spacesIndArr.push(wordCounter)}
     }
 
-    for (b = 0; b < blockCount; b++) {
-      if (splitPhrase[b] === "_") {
-        // phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
-        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
-      } else if (/[A-Z]/i.test(splitPhrase[b])) {
-        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
-          `<button class="empty-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`
-        )
-      } else {
-        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
-          `<span class="punctuation-span" data-word-number=${spacesIndArr[b]}>${splitPhrase[b]}</span>`
-        )
-      }
-    } // Ends the phraseAnswerBlocks.insertAdjacentHTML
+  for (b = 0; b < blockCount; b++) {
+    if (splitPhrase[b] === "_") {
+      // phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
+    } else if (/[A-Z]/i.test(splitPhrase[b])) {
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
+        `<button class="empty-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`
+      )
+    } else {
+      phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
+        `<span class="punctuation-span" data-word-number=${spacesIndArr[b]}>${splitPhrase[b]}</span>`
+      )
+    }
+  } // Ends the phraseAnswerBlocks.insertAdjacentHTML
 } // ends buildEmptyLetterBlocks Funciton
 
 
@@ -249,6 +275,25 @@ function filterAllChooseRandom() {
   } // ends Update Printed Counter funciton
 
 
+  // Fetch to check if player exists and CREATE new player if not
+  function playerCheck(name) {
+    fetch(`http://localhost:3000/api/v1/players/${name}/check`)
+    .then ( function(response) { return response.json()} )
+    .then ( function(response) {
+      debugger
+      if (!!response["name"]) { loggedIn = true}
+
+      playerLoggedInExposeNewGameButton()
+
+    })
+    // .then( function(data) {
+    //   if (data != undefined) {
+    //     playerDetails = resp
+        
+    //   } else { return resp.errors }
+    // })
+    // .catch(function(errors) { alert(errors) })
+  }  /// Ends playerCheck functin
 
 
 
