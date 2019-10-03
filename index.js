@@ -14,8 +14,10 @@ let pressedLetter
 let filterCategory = ""
 let filteredQuotes = ""
 let allQuotes = []
+let splitPhrase
 let corrospondingLetter
 let allAnswerBlocksDiv
+let wordCount
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
@@ -84,7 +86,7 @@ function hashOfLettersAndIndexes(phrase) {
   let letterIndex = 0
   let letter = ""
   let outputHash = {}
-  let splitPhrase = phrase.toUpperCase().replace(/ /g, "_").split("")
+  splitPhrase = phrase.toUpperCase().replace(/ /g, "_").split("")
   for (letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
     if (/[A-Z]/i.test(splitPhrase[letterindex])) {
 
@@ -103,35 +105,41 @@ function hashOfLettersAndIndexes(phrase) {
 
 function buildEmptyLetterBlocks(phrase) {
   phraseAnswerBlocks.innerHTML = ""
-  splitPhrase = phrase.toUpperCase().replace(/ /g, "_").split("")
   blockCount = phrase.length
-    for (let i = 1; i <= splitPhrase.filter(function (letter) { return letter === "_" }).length + 1; i++) {
-      phraseAnswerBlocks.insertAdjacentHTML('beforeend', `<div data-word-number="${i}"></div>`)
-    }}
+  wordCount = splitPhrase.filter(function (letter) { return letter === "_" }).length + 1
 
+    // This creates one EMPTY DIV for each word in the phrase
+  for (let i = 1; i <= wordCount; i++) {
+    phraseAnswerBlocks.insertAdjacentHTML('beforeend', `<div data-word-container="${i}"></div>`)
+  }
+  let spacesIndArr = []
+  let wordCounter = 1
+  for (let i = 0; i < splitPhrase.length; i++) {
+    if (splitPhrase[i] === "_") {
+      spacesIndArr.push(wordCounter)
+      wordCounter++
+    } else {
+      spacesIndArr.push(wordCounter)}
+    }
 
-    
     for (b = 0; b < blockCount; b++) {
       if (splitPhrase[b] === "_") {
-        phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>`)
-        phraseAnswerBlocks.insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b}></button>`)
+        // phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
+        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend", `<button class="empty-block-space" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
       } else if (/[A-Z]/i.test(splitPhrase[b])) {
-        phraseAnswerBlocks.insertAdjacentHTML("beforeend",
-          `<button class="empty-block" data-answer-index=${b}></button>`
+        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
+          `<button class="empty-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`
         )
       } else {
-        phraseAnswerBlocks.insertAdjacentHTML("beforeend",
-          `<span class="punctuation-span">${splitPhrase[b]}</span>`
+        phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
+          `<span class="punctuation-span" data-word-number=${spacesIndArr[b]}>${splitPhrase[b]}</span>`
         )
       }
     } // Ends the phraseAnswerBlocks.insertAdjacentHTML
-    phraseAnswerBlocks.insertAdjacentHTML('beforeend', '</div>')
-// } // ends buildEmptyLetterBlocks Funciton
-
+} // ends buildEmptyLetterBlocks Funciton
 
 
 //  Takes input and starts a game
-
 function filterAllChooseRandom() {
   createAllLetterBlocks()
   hangmanContainer.innerHTML = ""
