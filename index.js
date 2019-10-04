@@ -84,11 +84,11 @@ function playerLoggedInExposeNewGameButton() {
 
   categoryContainer.innerHTML = `
     <div></div>
-    <h1 style="color:white;">Select a category</h1>
+    <h1 style="color:white; font-weight: bold; ">Select a category</h1>
       <form id="gameCategoryForm" action="">
-        <select id="setCategory">
+        <select style="align: center" id="setCategory">
         </select>
-        <input type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
+        <input style="color:black; background-color: yellow; margin-top: 3%;" type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
        </form>
     `
   let dropdown = document.getElementById("setCategory")
@@ -142,7 +142,7 @@ function buildEmptyLetterBlocks(phrase) {
 
     // This creates one EMPTY DIV for each word in the phrase
   for (let i = 1; i <= wordCount; i++) {
-    phraseAnswerBlocks.insertAdjacentHTML('beforeend', `<div data-word-container="${i}"></div>`)
+    phraseAnswerBlocks.insertAdjacentHTML('beforeend', `<div style="margin-bottom: 3%;" data-word-container="${i}"></div>`)
   }
   let spacesIndArr = []
   let wordCounter = 1
