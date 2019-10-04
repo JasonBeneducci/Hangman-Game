@@ -80,8 +80,16 @@
     border-style: groove;
     border-radius: 10px;
     border-color: white;
-    padding: 7%;
+    padding: 1%;
+    margin-left: 1.5%;
 }
+
+#player-info-container {
+    background-color: lightgray;
+    border-radius: 10px;
+    border-radius: 10px;
+    margin-right: 1.5%;
+  }
 
 #winner {
     background-color: lime;
@@ -95,6 +103,7 @@
 #hangman-image {
     border-radius: 75px;
     padding: 0vh;
+    margin-top: 1.5%;
     
 }
 

@@ -24,7 +24,8 @@ let loggedIn = false
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
-const celebrationArr = ['<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/k41vMqRB0DRIs" width="480" height="271" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/xeXEpUVvAxCV2" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/l46CkATpdyLwLI7vi" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/10hO3rDNqqg2Xe" width="480" height="252" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/DZkZ6xYj18Jyw" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/Hd3GXtH7xs1CU" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/KXtq8oYQrYMIF9Esi7" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
+const nastyClownArr = ['images/nasty1.jpg','images/nasty2.jpg','images/nasty3.jpg','images/nasty4.jpg','images/nasty5.jpg']
+const celebrationArr = ['<iframe src="https://giphy.com/embed/iiQSTrHtDIgnw9YtlA" width="850" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="850" height="478" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/k41vMqRB0DRIs" width="850" height="478" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/DqQhFf7nje2k0" width="850" height="478" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/l46CkATpdyLwLI7vi" width="850" height="638" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/10hO3rDNqqg2Xe" width="850" height="435" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/DZkZ6xYj18Jyw" width="850" height="478" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/Hd3GXtH7xs1CU" width="850" height="638" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/KXtq8oYQrYMIF9Esi7" width="850" height="638" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
 const availablePrefixes = ["killerClown", "stripeClown", "krusty", "knifeClown", "gunClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
@@ -219,17 +220,18 @@ function filterAllChooseRandom() {
     
     
     infoDiv.innerHTML = `
-    <h1 style="color:white; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
-    <p style="background-color: black; color:white">Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
-    <p style="background-color: black; color:white">Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
+    <h1 style="color:white; border-radius: 10px; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
+    <p style="background-color: yellow; border-radius: 10px; color:black">Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
+    <p style="background-color: yellow; border-radius: 10px; color:black">Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
     <input type="button" value="Log Out" onclick="location.reload(true)" />
-    <h2 style="color: white">${Object.keys(gameHash)}</h2>
     `
   } // ends buildInfoBox function
 
 
   function youLose() {
-    phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOULOSE!!!!<p>")
+    printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 40px; background-color: yellow; ">You lose!  See you in your dreams.</h2>`)
+    hangmanContainer.innerHTML = " "
+    hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="${nastyClownArr.random()}" >`)
   }
   
   function wrongLetterPick() {
@@ -252,16 +254,15 @@ function filterAllChooseRandom() {
     if (counter === 1)
       {
         hangmanContainer.innerHTML = " "
-        printedCounterDiv.innerHTML = (`<h2>Nice work, but did you do it in time?!?!?</h2>`)
-        hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/kBTA59MvoikCLXGqRr" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
+        printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 30px; background-color: yellow; ">Nice work, but did you do it in time?!?!?</h2>`)
+        hangmanContainer.insertAdjacentHTML("afterbegin", `<iframe src="https://giphy.com/embed/kBTA59MvoikCLXGqRr" width="850" height="478" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>`)
         setTimeout(function() {
-          printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
+          printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 50px; background-color: yellow; ">Nice Win!</h2>`)
           hangmanContainer.innerHTML = " "
           hangmanContainer.insertAdjacentHTML("afterbegin", `${celebrationArr.random()}`)
-          phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
         }, 10700)
     } else {
-      printedCounterDiv.innerHTML = (`<h2>Nice Win!</h2>`)
+      printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 50px; background-color: yellow; ">Nice Win!</h2>`)
       hangmanContainer.innerHTML = " "
       hangmanContainer.insertAdjacentHTML("afterbegin", `${celebrationArr.random()}`)
       phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
