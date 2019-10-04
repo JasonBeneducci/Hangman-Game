@@ -14,8 +14,11 @@ let pressedLetter
 let filterCategory = ""
 let filteredQuotes = ""
 let allQuotes = []
+let phraseDetails
+let phrase = ""
 let splitPhrase
 let totalGames
+let hintDiv
 let corrospondingLetter
 let allAnswerBlocksDiv
 let wordCount
@@ -178,17 +181,36 @@ function buildEmptyLetterBlocks(phrase) {
 } // ends buildEmptyLetterBlocks Funciton
 
 
+function ingameCategoryDivChange() {
+  categoryContainer.innerHTML = `
+
+  <h1 style="color:white;">Category: ${filterCategory}</h1>
+  <div id="hint"></div>
+
+    <div>
+      <form id="gameCategoryForm" action="">
+        <select id="setCategory" >  </select>
+        <input type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
+      </form>
+    </div>
+    `
+  let dropdown = document.getElementById("setCategory")
+  categories.forEach(function (cat) {
+    if (cat === filterCategory) {
+      dropdown.insertAdjacentHTML("beforeend", `<option  value="${cat}" selected >${cat}</option>`)
+    } else {
+    dropdown.insertAdjacentHTML("beforeend", `<option  value="${cat}">${cat}</option>`)
+    }
+  })
+
+}
+
 //  Takes input and starts a game
 
-function increaseGameCount() {
 
-}
-
-function increaseWinCount() {
-
-}
 function filterAllChooseRandom() {
-  
+  filterCategory = document.getElementById("setCategory").value
+  ingameCategoryDivChange()
   lettersContainer.focus()
   playerNewGameFetch(playerDetails.name)
   createAllLetterBlocks()
@@ -197,10 +219,9 @@ function filterAllChooseRandom() {
   updatePrintedCounter()
   hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0">`)
   imagePrefix = availablePrefixes.random()
-  filterCategory = document.getElementById("setCategory").value
   filteredQuotes = allQuotes.filter(function (q) { return q.category == filterCategory })
-
-  let phrase = filteredQuotes.random().quote
+  phraseDetails = filteredQuotes.random()
+  phrase = phraseDetails.quote
   phraseContainer.innerHTML = ""
   phraseContainer.insertAdjacentHTML('beforeend', `<p>QUOTE ---> ${phrase} <--- QUOTE<p>`)
 
@@ -243,8 +264,14 @@ function filterAllChooseRandom() {
     } else {
       // hangmanImage.setAttribute("src", `./images/${imagePrefix}${counter}.png`)
       // hangmanContainer.innerHTML = `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`
-        hangmanContainer.innerHTML = " "
-        hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0" >`)
+      hangmanContainer.innerHTML = " "
+      hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0" >`)
+      if (counter === 3) {
+        hintDiv = categoryContainer.querySelector("#hint")
+        hintDiv.insertAdjacentHTML('beforeend', `
+          <h3 style="color: red; font-size:60px;">Heres a hint: ${phraseDetails.author}</h3>
+          `)
+        }
     }
 
   }  // Ends Wrong Letter
