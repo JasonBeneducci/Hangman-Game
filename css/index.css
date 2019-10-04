@@ -259,6 +259,10 @@ body {
     background-size: 100%
 }
 
+#printed-counter {
+    border-radius: 10px;
+}
+
 
 .letter-block-divs {
     margin: 0px;

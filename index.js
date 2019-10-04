@@ -190,7 +190,7 @@ function ingameCategoryDivChange() {
     <div>
       <form id="gameCategoryForm" action="">
         <select id="setCategory" >  </select>
-        <input type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
+        <input style="color:black; background-color: yellow; margin-top: 3%;" type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
       </form>
     </div>
     `
@@ -241,9 +241,9 @@ function filterAllChooseRandom() {
     
     
     infoDiv.innerHTML = `
-    <h1 style="color:white; border-radius: 10px; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
-    <p style="background-color: yellow; border-radius: 10px; color:black">Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
-    <p style="background-color: yellow; border-radius: 10px; color:black">Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
+    <h1 style="color:white; font-size: 54px; border-radius: 10px; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
+    <p style="font-size: 35px; background-color: yellow; border-radius: 10px; color:black">Total Games: <span style="color:lime; font-weight:bold;" id="total_games">${playerDetails.total_games}</span></p>
+    <p style="font-size: 25px; background-color: yellow; border-radius: 10px; color:black">Total Wins: <span style="color:lime; font-weight:bold;" id="total_wins">${playerDetails.total_wins}</span></p>
     <input type="button" value="Log Out" onclick="location.reload(true)" />
     `
   } // ends buildInfoBox function
@@ -278,7 +278,7 @@ function filterAllChooseRandom() {
 
   function youWin() {
     playerNewWinFetch(playerDetails.name)
-    phraseAnswerBlocks.innerHTML = `<h1>${phrase}</h1>`
+    phraseAnswerBlocks.innerHTML = `<h1 style="color:lime; font-size: 40px; font-weight: bold;" >${phrase}</h1>`
     if (counter === 1)
       {
         hangmanContainer.innerHTML = " "
@@ -295,6 +295,7 @@ function filterAllChooseRandom() {
       hangmanContainer.insertAdjacentHTML("afterbegin", `${celebrationArr.random()}`)
       phraseContainer.insertAdjacentHTML('afterbegin', "<p>YOU WIN!!!!!!!!!!!!</p>")
     }
+    counter = ""
   }
 
   function actOnPlayedLetter(letter) {
