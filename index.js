@@ -110,7 +110,7 @@ function playerLoggedInExposeNewGameButton() {
 function createAllLetterBlocks() {
   lettersContainer.innerHTML = ""
   lettersArr.forEach(function (let) {
-    lettersContainer.insertAdjacentHTML('beforeend', `<div class="col">
+    lettersContainer.insertAdjacentHTML('beforeend', `<div class="col letter-block-divs">
           <button id="letter-possibility-button" data-id="${let}" type="button">${let}</button></div>
       `) // ends lettersContainer.insertAdjacentHTML(
   })// Ends lettersArr.forEach loop
@@ -269,7 +269,7 @@ function filterAllChooseRandom() {
       if (counter === 3) {
         hintDiv = categoryContainer.querySelector("#hint")
         hintDiv.insertAdjacentHTML('beforeend', `
-          <h3 style="color: red; font-size:60px;">Heres a hint: ${phraseDetails.author}</h3>
+          <h3 style="color: red; font-size:50px;">Here's a hint: ${phraseDetails.author}</h3>
           `)
         }
     }
@@ -278,6 +278,7 @@ function filterAllChooseRandom() {
 
   function youWin() {
     playerNewWinFetch(playerDetails.name)
+    phraseAnswerBlocks.innerHTML = `<h1>${phrase}</h1>`
     if (counter === 1)
       {
         hangmanContainer.innerHTML = " "
@@ -327,7 +328,7 @@ function filterAllChooseRandom() {
 
   function updatePrintedCounter() {
     if (counter === 1) {
-      printedCounterDiv.innerHTML = `<h2>Hurry! You have only 1 chance left, but can still save the day!</h2>`
+      printedCounterDiv.innerHTML = `<h2>He's haninging! You have 1 chance left!</h2>`
     } else {
       printedCounterDiv.innerHTML = `<h2>You have ${counter} turns left!</h2>`
     }
