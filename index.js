@@ -250,7 +250,8 @@ function filterAllChooseRandom() {
 
 
   function youLose() {
-    printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 40px; background-color: yellow; ">You lose!  See you in your dreams.</h2>`)
+    phraseAnswerBlocks.innerHTML = `<h1 style="color:lime; font-size: 40px; font-weight: bold;" >"${phrase}"</h1>`
+    printedCounterDiv.innerHTML = (`<h2 style=" font-weight: bold; font-size: 30px; background-color: yellow; ">You lose!  See you in your dreams.</h2>`)
     hangmanContainer.innerHTML = " "
     hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="${nastyClownArr.random()}" >`)
   }
@@ -278,7 +279,7 @@ function filterAllChooseRandom() {
 
   function youWin() {
     playerNewWinFetch(playerDetails.name)
-    phraseAnswerBlocks.innerHTML = `<h1 style="color:lime; font-size: 40px; font-weight: bold;" >${phrase}</h1>`
+    phraseAnswerBlocks.innerHTML = `<h1 style="color:lime; font-size: 40px; font-weight: bold;" >"${phrase}"</h1>`
     if (counter === 1)
       {
         hangmanContainer.innerHTML = " "
