@@ -24,11 +24,11 @@ let loggedIn = false
 const printedCounterDiv = document.getElementById("printed-counter")
 const infoDiv = document.getElementById("player-info-container")
 let imagePrefix = ""
-const celebrationArr = ['<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/8CSflsMG1IFos" width="480" height="271" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/xeXEpUVvAxCV2" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/OG766ZCawdMZy" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/10hO3rDNqqg2Xe" width="480" height="252" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/DZkZ6xYj18Jyw" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/Hd3GXtH7xs1CU" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/KXtq8oYQrYMIF9Esi7" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
+const celebrationArr = ['<iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>','<iframe src="https://giphy.com/embed/k41vMqRB0DRIs" width="480" height="271" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/xeXEpUVvAxCV2" width="480" height="242" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/l46CkATpdyLwLI7vi" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/10hO3rDNqqg2Xe" width="480" height="252" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/DZkZ6xYj18Jyw" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/Hd3GXtH7xs1CU" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>', '<iframe src="https://giphy.com/embed/KXtq8oYQrYMIF9Esi7" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>']
 const availablePrefixes = ["killerClown", "stripeClown", "krusty", "knifeClown", "gunClown"]
 const lettersArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 const hangmanImageContainer = document.querySelector("#hangman-image-container")
-const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics"]
+const categories = ["Movie Quotes", "Professional Sport Teams", "Song Lyrics", "US States"]
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -87,7 +87,7 @@ function playerLoggedInExposeNewGameButton() {
       <form id="gameCategoryForm" action="">
         <select id="setCategory">
         </select>
-        <input type="button" value="New Game" onclick="filterAllChooseRandom()" />
+        <input type="button" value="New Game" onclick="this.blur(); filterAllChooseRandom()" />
        </form>
     `
   let dropdown = document.getElementById("setCategory")
@@ -169,6 +169,11 @@ function buildEmptyLetterBlocks(phrase) {
       )
     }
   } // Ends the phraseAnswerBlocks.insertAdjacentHTML
+    phraseAnswerBlocks.querySelector(`[data-word-container="${wordCount}"]`).insertAdjacentHTML('beforeend', `
+      <button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>
+      <button class="fake-correct-answer-block" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}>A</button>
+      <button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>
+    `)
 } // ends buildEmptyLetterBlocks Funciton
 
 
@@ -182,6 +187,8 @@ function increaseWinCount() {
 
 }
 function filterAllChooseRandom() {
+  
+  lettersContainer.focus()
   playerNewGameFetch(playerDetails.name)
   createAllLetterBlocks()
   hangmanContainer.innerHTML = ""
@@ -215,6 +222,7 @@ function filterAllChooseRandom() {
     <h1 style="color:white; background-color: black; font-weight: bold; text-transform: uppercase">${playerDetails.name}'s Record:</h1>
     <p style="background-color: black; color:white">Total Games: <span id="total_games">${playerDetails.total_games}</span></p>
     <p style="background-color: black; color:white">Total Wins: <span id="total_wins">${playerDetails.total_wins}</span></p>
+    <input type="button" value="Log Out" onclick="location.reload(true)" />
     <h2 style="color: white">${Object.keys(gameHash)}</h2>
     `
   } // ends buildInfoBox function
@@ -235,7 +243,6 @@ function filterAllChooseRandom() {
       // hangmanContainer.innerHTML = `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image">`
         hangmanContainer.innerHTML = " "
         hangmanContainer.insertAdjacentHTML("afterbegin", `<img src="./images/${imagePrefix}${counter}.png" id="hangman-image" width="400" height="400" frameBorder="0" >`)
-      // debugger
     }
 
   }  // Ends Wrong Letter
@@ -280,14 +287,12 @@ function filterAllChooseRandom() {
         // let newBlock = setTimeout(function () { allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).className = "empty-block"},1000)
         let newBlock = allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`)
         newBlock.className = "empty-block"
-        // debugger
         newBlock.innerHTML = `<div class="correct-answer-block">${letter}</div>`
       if (Object.keys(gameHash).length == 0) {
         youWin()
       } // ends the if statement to see if the player won the game
     }) //Ends indexesOfPickedLetterArr.forEach Loop
     } else {
-      console.log('hitting the wrong letter pick', letter)
       wrongLetterPick()
     }
   } // ends actOnPlayedLetter function
@@ -355,7 +360,6 @@ function filterAllChooseRandom() {
 //  ---------- EVENT LISTENERS ------------
 lettersContainer.addEventListener("click", function (e) {
   e.preventDefault()
-  // console.dir(counter)
   // add conditional logic here to check if the event target is a letter contained in the current phrase
   // if it is ...... we want to turn that button green and render that letter into the phraseContainer
   if (e.target.tagName === "BUTTON"  && e.target.id == "letter-possibility-button"  && counter != "") {
@@ -382,7 +386,6 @@ lettersContainer.addEventListener("click", function (e) {
 document.addEventListener("keydown", function (keypress) {
   // keypress.preventDefault()
   if (keypress.keyCode >= 65 && keypress.keyCode <= 90 && counter != "") {
-    console.log(keypress.code.slice(-1))
     pressedLetter = keypress.code.slice(-1)
     corrospondingLetter = lettersContainer.querySelector(`[data-id='${pressedLetter}']`)
     if (corrospondingLetter.id === "letter-possibility-button") {
