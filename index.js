@@ -122,13 +122,16 @@ function hashOfLettersAndIndexes(phrase) {
   let letter = ""
   let outputHash = {}
   splitPhrase = phrase.toUpperCase().replace(/ /g, "_").split("")
+  // This builds a hash where KEY = the unique letter in the answer, 
+  // and VALUE = an array of the index number/s of where that KEY letter is found in the answer
   for (letterindex = 0; letterindex < splitPhrase.length; letterindex++) {
     if (/[A-Z]/i.test(splitPhrase[letterindex])) {
-
+      // if the letter at hand is already a KEY in the hash, then just add the index to the array VALUEs
       if (!!outputHash[splitPhrase[letterindex]]) {
         letter = splitPhrase[letterindex]
         outputHash[letter].push(letterindex)
       } else {
+      // Otherwise, add the letter as a new KEY and its index as the first array value
         letter = splitPhrase[letterindex]
         outputHash[letter] = [letterindex]
       }
@@ -157,8 +160,10 @@ function buildEmptyLetterBlocks(phrase) {
       spacesIndArr.push(wordCounter)}
     }
 
+    // This block builds 
   for (b = 0; b < blockCount; b++) {
     if (splitPhrase[b] === "_") {
+      // If its a spacebar, build 3 overlapping blocks for accpeptable visual styling
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
         `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
@@ -166,8 +171,10 @@ function buildEmptyLetterBlocks(phrase) {
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend",
         `<button class="empty-block-space" data-answer-index=${b}  data-word-number=${spacesIndArr[b]}></button>`)
     } else if (/[A-Z]/i.test(splitPhrase[b])) {
+      // if its a letter, hide the letter but build the styled empty block
       phraseAnswerBlocks.children[spacesIndArr[b] - 1].insertAdjacentHTML("beforeend", `<button class="empty-block-startup" data-answer-index=${b} data-word-number=${spacesIndArr[b]}></button>`)
     } else {
+      // if that space is for a punctuation, print it at game start
       phraseAnswerBlocks.children[spacesIndArr[b] - 1 ].insertAdjacentHTML("beforeend",
         `<span class="punctuation-span" data-word-number=${spacesIndArr[b]}>${splitPhrase[b]}</span>`
       )
@@ -199,7 +206,7 @@ function ingameCategoryDivChange() {
     if (cat === filterCategory) {
       dropdown.insertAdjacentHTML("beforeend", `<option  value="${cat}" selected >${cat}</option>`)
     } else {
-    dropdown.insertAdjacentHTML("beforeend", `<option  value="${cat}">${cat}</option>`)
+      dropdown.insertAdjacentHTML("beforeend", `<option  value="${cat}">${cat}</option>`)
     }
   })
 
@@ -305,17 +312,6 @@ function filterAllChooseRandom() {
       delete gameHash[letter]
       allAnswerBlocksDiv = document.getElementById("phrase-answer_blocks")
       indexesOfPickedLetterArr.forEach( function(index) {
-        
-        // allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).innerHTML = `<div class="wrapper">
-        // <div class="flame-wrapper">
-        //   <div class="flame red"></div>
-        //   <div class="flame orange"></div>
-        //   <div class="flame gold"></div>
-        //   <div class="flame white"></div>
-        //   <div class="base blue"></div>
-        //   <div class="base black"></div>
-        // </div>`
-        // let newBlock = setTimeout(function () { allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`).className = "empty-block"},1000)
         let newBlock = allAnswerBlocksDiv.querySelector(`[data-answer-index = "${index}"]`)
         newBlock.className = "empty-block"
         newBlock.innerHTML = `<div class="correct-answer-block">${letter}</div>`

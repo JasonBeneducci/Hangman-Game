@@ -26,7 +26,7 @@ class Api::V1::PlayersController < ApplicationController
 
   private
 
-  def playter_params
+  def player_params
     params.require(:player).permit(:name, :games_played, :total_wins)
   end
 end
